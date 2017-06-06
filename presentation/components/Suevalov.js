@@ -9,7 +9,7 @@ class Suevalov extends Component {
       'margin': '10px auto',
       'width': '130px',
       'height': '130px',
-      'borderRadius': '60px'
+      'borderRadius': '50%'
     };
     return (
       <div style={{ display: 'inline-block', width: '400px' }}>
@@ -21,15 +21,10 @@ class Suevalov extends Component {
   render() {
     return (
       <div>
-        { this.renderMe() }
+        {this.renderMe()}
         <div>
-          <Link href="http://suevalov.com" style={{ fontSize: '1.2em' }} target="__blank">
+          <Link textColor="white" href="http://suevalov.com" style={{ fontSize: '1em' }} target="__blank">
             Alex Suevalov
-          </Link>
-        </div>
-        <div>
-          <Link href="http://dataart.com/" style={{ fontSize: '1.2em' }} target="__blank">
-            DataArt
           </Link>
         </div>
       </div>

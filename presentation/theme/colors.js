@@ -1,7 +1,9 @@
 export default {
-  navy: '#49848E',
-  lightBlue: '#A9ECF8',
   lightGray: '#F2F2F2',
   white: '#FFFFFF',
-  dark: '#2D2D2D'
+  blue: '#112233',
+  dark: '#221F20',
+  lightBlue: '#64C1DD',
+  green: '#4BAC88',
+  red: '#CE5641'
 };

@@ -1,21 +1,6 @@
 /*eslint-disable object-shorthand*/
 
-const defaultColors = {
-  primary: "#f9c300",
-  secondary: "black",
-  tertiary: "white",
-  quartenary: "white"
-};
-
-const defaultFonts = {
-  primary: "Open Sans Condensed",
-  secondary: "Lato",
-  tertiary: "monospace"
-};
-
-const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
-  const colors = Object.assign({}, defaultColors, colorArgs);
-  const fonts = Object.assign({}, defaultFonts, fontArgs);
+const screen = (colors, fonts) => {
   return {
     colors: colors,
     fonts: fonts,
@@ -23,10 +8,12 @@ const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
       body: {
         background: colors.primary,
         fontFamily: fonts.primary,
-        fontWeight: "normal",
+        fontWeight: 300,
         fontSize: "2em",
-        color: colors.secondary,
-        overflow: "hidden"
+        color: colors.text,
+        overflow: "hidden",
+        "-webkit-font-smoothing": "antialiased",
+        "font-smoothing": "antialiased",
       },
       "html, body": {
         height: "100%"
@@ -126,7 +113,7 @@ const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
         },
         bar: {
           height: "100%",
-          background: colors.secondary,
+          background: colors.bar,
           transition: "all 0.3s ease-out"
         }
       },
@@ -193,53 +180,47 @@ const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
       },
       heading: {
         h1: {
-          color: colors.tertiary,
-          fontSize: "6.1rem",
+          fontSize: "1.5em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
           margin: 0,
-          zoom: 1
+          zoom: 1,
         },
         h2: {
-          color: colors.secondary,
-          fontSize: "5.88rem",
+          fontSize: "1.4em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
           margin: 0
         },
         h3: {
-          color: colors.secondary,
-          fontSize: "4.9rem",
+          fontSize: "1.3em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
           margin: "0.5rem auto"
         },
         h4: {
-          color: colors.secondary,
-          fontSize: "3.82rem",
+          fontSize: "1.2em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
-          margin: "0.5rem auto"
+          margin: "0.5em auto"
         },
         h5: {
-          color: colors.secondary,
-          fontSize: "3.19rem",
+          fontSize: "1.1em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
-          margin: "0.5rem auto"
+          margin: "0.5em auto"
         },
         h6: {
-          color: colors.secondary,
-          fontSize: "2.66rem",
+          fontSize: "1em",
           fontFamily: fonts.secondary,
           lineHeight: 1,
           fontWeight: 300,
-          margin: "0.5rem auto"
+          margin: "0.5em auto"
         }
       },
       image: {
@@ -248,7 +229,6 @@ const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
       },
       link: {
         textDecoration: "none",
-        color: colors.secondary,
         fontWeight: 300
       },
       listItem: {

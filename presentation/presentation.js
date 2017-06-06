@@ -11,6 +11,9 @@ import {
   ListItem,
   List,
   Slide,
+  Layout,
+  Fill,
+  Image,
 } from "spectacle";
 
 import colors from './theme/colors';
@@ -33,22 +36,24 @@ const images = {
   me: require('../assets/me.png'),
   ironmanThanks: require('../assets/ironman-thanks.gif'),
   compose: require('../assets/compose.gif'),
-  mindBlown: require('../assets/mind-blown.gif'),
-  itnonstop: require('../assets/it-non-stop.png')
+  mainCover: require('../assets/main-cover.jpg'),
+  dataart: require('../assets/dataart.png'),
 };
 
 preloader(images);
 
 const theme = createTheme(
   {
-    primary: colors.lightBlue,
-    secondary: colors.navy,
-    tertiary: colors.navy,
+    primary: colors.blue,
+    secondary: colors.dark,
+    tertiary: colors.lightBlue,
     quartenary: colors.lightGray,
-    white: colors.white
+    white: colors.white,
+    bar: colors.green,
+    text: colors.dark,
   },
   {
-    primary: fonts.OpenSans,
+    primary: fonts.Lato,
     secondary: fonts.Lato,
     tertiary: fonts.Monospace
   }
@@ -57,27 +62,35 @@ const theme = createTheme(
 class Presentation extends React.Component {
   render() {
     return (
-      <Deck transition={["fade"]} theme={theme} transitionDuration={500} progress="bar">
+      <Deck transition={["fade"]} theme={theme} transitionDuration={300} progress="bar">
 
         {/* Intro slide */}
-        <Slide transition={["fade"]} bgColor={colors.lightBlue} notes="Introduce yourself">
-          <Heading size={1} fit>
-            Mastering HOC with
-            </Heading>
-          <Heading size={2} fit caps style={{ fontWeight: 700 }}>
-            Recompose
-            </Heading>
-          <Heading size={6} style={{ marginTop: 30, marginBottom: 30 }}>
-            ReactJS Wroclaw #7
-            </Heading>
-          <Suevalov photo={images.me.replace("/", "")} />
+        <Slide transition={["fade"]} notes="Introduce yourself" bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
+          <Heading size={1} textSize="2em" textColor="white">
+            Code-Splitting in React apps
+          </Heading>
+          <Heading size={6} style={{ marginTop: 50, marginBottom: 30 }} textColor="white">
+            React Poznan
+          </Heading>
+          <div style={{ marginBottom: 20 }}>
+            <Suevalov photo={images.me.replace("/", "")} />
+          </div>
+          <Link textColor="white" href="http://suevalov.com/presentations/code-splitting" target="__blank">
+            http://suevalov.com/presentations/code-splitting
+          </Link>
+        </Slide>
+
+        <Slide bgColor="white">
+          <Link alt="DataArt" href="http://dataart.com/" style={{ display: 'block' }} target="__blank">
+            <Image src={images.dataart.replace("/", "")} />
+          </Link>
         </Slide>
 
         {/* Talk plan slide */}
         <Slide transition={["fade"]}
-          bgColor={colors.lightGray}
+          bgColor="white"
         >
-          <List style={{ lineHeight: '2.4em' }}>
+          <List style={{ lineHeight: '2.4em' }} textColor="dark">
             <ListItem>What are higher-order components?</ListItem>
             <ListItem>What are some use cases?</ListItem>
             <ListItem>Using recompose & building custom HOCs</ListItem>
@@ -87,7 +100,6 @@ class Presentation extends React.Component {
         {/* What HOC are? */}
         <Slide
           transition={["fade"]}
-          bgColor={colors.navy}
           notes={`
                 <ul>
                   <li>let's do a recap - on the same page</li>
@@ -104,7 +116,6 @@ simple concept</li>
 
         <Slide
           transition={["fade"]}
-          bgColor={colors.navy}
           notes={`
               They might also accept some additional parameters.
             `}
@@ -119,7 +130,7 @@ simple concept</li>
 
         <Slide
           transition={["fade"]}
-          bgColor={colors.navy}
+
           notes={`
               Or they might use currying. Good reason for that.  
             `}
@@ -150,58 +161,9 @@ simple concept</li>
           ]}
         />
 
-        {/* `radium` example */}
-        <CodeSlide
-          notes={`
-              <ul>
-                <li>Radium is library for inline-styles approach and handling pseudo selectors.</li>
-                <li>Wrap the render function</li>
-                <li>Recurse into the result of the original render</li>
-              </ul>  
-            `}
-          transition={["fade"]}
-          lang="js"
-          code={require("!raw!../assets/code/radium.example")}
-          ranges={[
-            { loc: [0, 1], title: 'radium' },
-            { loc: [14, 25] },
-            { loc: [26, 28], note: '(Component) => EnhancedComponent' }
-          ]}
-        />
-
-        {/* `relay` example */}
-        <CodeSlide
-          notes={`
-              <ul>
-                <li>Slightly different signature</li>
-                <li>passes down the data that is being fetched from 
-GraphQL Endpoint</li>
-                <li>delay
-rendering until data dependency is resolved</li>
-                <li>'connect', 'radium' and 'relay' are different</li>
-                <li>but each time you enhance the 
-behaviour of component by wrapping it by HOC</li>
-              </ul>  
-            `}
-          transition={["fade"]}
-          lang="js"
-          code={require("!raw!../assets/code/relay.example")}
-          ranges={[
-            { loc: [0, 1], title: 'relay' },
-            { loc: [2, 7] },
-            { loc: [8, 22], note: '(Component, arg1) => EnhancedComponent' }
-          ]}
-        />
-
         <Slide
           transition={["fade"]}
           bgColor={colors.lightGray}
-          notes={`
-              <ul>
-                <li>will see this items in more detail</li>
-                <li>study the ways of implementing HOCs</li>
-              </ul>
-            `}
         >
           <Heading size={3} color="primary">
             What can I do with HOC?
@@ -222,23 +184,6 @@ behaviour of component by wrapping it by HOC</li>
           </List>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.lightGray}
-          notes={`
-              There're two ways to do that  
-            `}
-        >
-          <Heading size={3} color="primary">
-            Props Proxy
-            </Heading>
-          <Heading size={2} color="primary">
-            &
-            </Heading>
-          <Heading size={3} color="primary">
-            Inheritance Inversion
-            </Heading>
-        </Slide>
 
         {/* Props Proxy */}
         <CodeSlide
@@ -394,137 +339,14 @@ lifecycle hooks)</li>
           />
         </Slide>
 
-        <CodeSlide
-          notes={`
-              <ul>
-                <li>What can you do with Inheritance Inversion?</li>
-                <li>Render Highjacking because the HOC takes control of the render output of the 
-WrappedComponent and can do all sorts of stuff with it</li>
-                <li>cannot change received props, but can change output</li>
-              </ul>
-            `}
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/inheritance-inversion-examples.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 1], title: 'Inheritance Inversion' },
-            { loc: [2, 3] },
-            { loc: [4, 15] },
-            { loc: [16, 17] },
-            { loc: [18, 34] },
-            { loc: [36, 37] },
-            { loc: [39, 40] },
-            { loc: [41, 55] }
-          ]}
-        />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/composing-hocs.example')}
-          style={{ fontSize: '0.8em' }}
-          ranges={[
-            { loc: [0, 1], title: 'Composing HOCs' },
-            { loc: [2, 6] },
-            { loc: [7, 14] },
-            { loc: [15, 23] },
-            { loc: [25, 26] },
-            { loc: [26, 29] },
-            { loc: [29, 32] },
-            { loc: [32, 41] }
-          ]}
-        />
-
         <Slide
           transition={["fade"]}
           bgColor={colors.lightGray}
-          notes={`
-              <ul>
-                <li>looks like we solid with what HOCs are and how we can use then in our applications</li>
-                <li>has significally changed the way I develop</li>
-                <li>Open-sourced by Andrew Clark, co-creator of Redux, in 2015.</li>
-                <li>always start with presentational component</li>
-                <li>Recompose helps you to ease the pain and enhance your presentational component by gradually using composition.
-</li>
-              </ul>  
-            `}
         >
           <Heading size={2} fit caps style={{ fontWeight: 300 }}>
             Recompose
             </Heading>
         </Slide>
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/with-state.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 0], title: 'lift state into functional wrappers' },
-            { loc: [0, 1] },
-            { loc: [1, 8] }
-          ]}
-        />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/with-reducer.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 0], title: 'lift state in Redux style' },
-            { loc: [0, 10] },
-            { loc: [11, 12] },
-            { loc: [12, 19] }
-          ]}
-        />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/recompose-optimize.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 0], title: 'optimize rendering performance' },
-            { loc: [0, 2] },
-            { loc: [3, 6] },
-            { loc: [7, 11] }
-          ]}
-        />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/recompose-modify-props.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 0], title: 'modify props' },
-            { loc: [0, 5] },
-            { loc: [6, 8] },
-            { loc: [10, 20] },
-            { loc: [20, 28] },
-            { loc: [30, 36] },
-            { loc: [39, 44] },
-            { loc: [45, 49] },
-            { loc: [52, 57] },
-            { loc: [58, 67] },
-            { loc: [68, 69] }
-          ]}
-        />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/recompose-other-stuff.example')}
-          style={{ fontSize: '0.7em' }}
-          ranges={[
-            { loc: [0, 0], title: 'do other awesome things' },
-            { loc: [0, 8] },
-            { loc: [11, 18] },
-            { loc: [19, 21] }
-          ]}
-        />
 
         <Slide transition={["fade"]} bgImage={images.compose.replace("/", "")} bgDarken={0.55}>
           <Heading size={3} textColor={colors.white}>
@@ -544,12 +366,6 @@ WrappedComponent and can do all sorts of stuff with it</li>
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.mindBlown.replace("/", "")} bgDarken={0.55}>
-          <Heading size={3} textColor={colors.white}>
-            Let's try to create something
-            </Heading>
-        </Slide>
-
         <Slide transition={["fade"]} bgColor={colors.lightGray}>
           <Heading size={2}>Pros</Heading>
           <List style={{ textAlign: 'center', lineHeight: '2.2em' }}>
@@ -566,22 +382,6 @@ WrappedComponent and can do all sorts of stuff with it</li>
             <ListItem>Expensive to change when abstraction is wrong</ListItem>
             <ListItem>Performance cavets</ListItem>
           </List>
-        </Slide>
-
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.lightGray}
-          notes={`
-              <ul>
-                <li> using higher-order component helpers leads to smaller, more focused components, and provides a better programming model</li>
-                <li>, any abstraction over an existing API is going to come with trade-offs</li>
-                <li>there is a performance overhead when introducing a new component to the tree</li>
-                <li>referentially transparent</li>
-                <li>Recompose uses a special version of createElement() that returns the output of stateless functions instead of creating a new element.</li>
-              </ul>
-            `}
-        >
-          <Heading size={2}>Performance & Optimizations</Heading>
         </Slide>
 
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
@@ -604,23 +404,7 @@ WrappedComponent and can do all sorts of stuff with it</li>
             </ListItem>
           </List>
         </Slide>
-
-        <Slide
-          transition={["fade"]}
-          bgImage={images.itnonstop.replace("/", "")}
-          notes={`
-              <ul>
-                <li>a series of conferences organized by DataArt</li>
-                <li>IT NonStop conferences are held in 10 cities across Poland, Ukraine, and Russia.</li>
-                <li>Each of the conferences is focused on a particular aspect of IT development</li>
-                <li>10 December</li>
-                <li>We will talk about standards, elegant solutions and the latest trends of front-end development.</li>
-<li>Сomplex things in simple terms, that is the beauty of front-end.</li>
-              </ul>
-            `}
-        />
-
-      </Deck>
+      </Deck >
     );
   }
 }
