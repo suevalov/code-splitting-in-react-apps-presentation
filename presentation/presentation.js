@@ -657,15 +657,98 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
         <CodeSlide
           transition={["fade"]}
           lang="js"
-          code={''}
+          code={`class AsyncComponent extends React.Component {
+
+  props: {
+    loader: () => Promise<any>,
+    renderPlaceholder?: () => React.Component,
+    placeholderHeight?: number,
+  };
+
+  state = {
+    Component: null
+  };
+
+  componentDidMount() {
+    this.props.loader()
+      .then(module => {
+        return mod.default ? 
+          mod.default : mod
+      })
+      .then((Component) => {
+        this.setState({ Component });
+      });
+  }
+
+  render() {
+    const { Component } = this.state;
+    const { renderPlaceholder, placeholderHeight } = this.props;
+    if (Component) {
+      return <Component {...this.props} />;
+    }
+
+    return renderPlaceholder ?
+      renderPlaceholder() :
+      <Placeholder height={placeholderHeight} />;
+  }
+}
+
+const makeItAsync = (loader) => (props) => (
+  <AsyncComponent {...props} loader={loader} />
+);
+`}
           ranges={[
-            { loc: [0, 1], title: 'react-redux' },
-            { loc: [1, 2] },
-            { loc: [3, 9] },
-            { loc: [10, 13] },
-            { loc: [14, 17], note: '(arg1, arg2) => (Component) => EnhancedComponent' }
+            { loc: [0, 1] },
+            { loc: [2, 7] },
+            { loc: [8, 11] },
+            { loc: [12, 22] },
+            { loc: [26, 29] },
+            { loc: [30, 33] },
+            { loc: [36, 39] }            
           ]}
         />
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="jsx"
+            source={`const loader = () => import('./Login');
+
+const AsyncLogin = (props) => (
+  <AsyncComponent {...props} loader={loader} />
+);
+
+const AsyncLogin = makeItAsync(loader);
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.8em' }}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">React Router v4</Heading>
+          <CodePane
+            lang="jsx"
+            source={`const Foo = makeItAsync(() => import('./Foo'));
+const Bar = makeItAsync(() => import('./Bar'));
+
+const App = () =>
+  <BrowserRouter>
+    <Link to="/foo">Foo</Link>
+    <Link to="/bar">Bar</Link>
+    <Match pattern="/foo" component={Foo} />
+    <Match pattern="/bar" component={Bar} />
+  </BrowserRouter>
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em' }}
+          />
+        </Slide>
 
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
           <Heading size={1} textColor='white' style={{ fontSize: '2.5em' }}>Thank you!</Heading>
