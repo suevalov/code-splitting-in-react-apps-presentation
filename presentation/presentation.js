@@ -2,6 +2,8 @@
 
 import preloader from "spectacle/lib/utils/preloader";
 import CodeSlide from 'spectacle-code-slide';
+import Terminal from "spectacle-terminal";
+import Typist from "react-typist";
 import React from "react";
 import {
   CodePane,
@@ -14,6 +16,9 @@ import {
   Layout,
   Fill,
   Image,
+  BlockQuote,
+  Quote,
+  Cite,
 } from "spectacle";
 
 import colors from './theme/colors';
@@ -38,6 +43,10 @@ const images = {
   compose: require('../assets/compose.gif'),
   mainCover: require('../assets/main-cover.jpg'),
   dataart: require('../assets/dataart.png'),
+  development: require('../assets/development.jpg'),
+  lowConnection: require('../assets/low-connectivity.jpg'),
+  lowConnection2: require('../assets/low-connectivity-2.jpg'),
+  websiteOpeningProcess: require('../assets/website_opening_process.png'),
 };
 
 preloader(images);
@@ -49,8 +58,16 @@ const theme = createTheme(
     tertiary: colors.lightBlue,
     quartenary: colors.lightGray,
     white: colors.white,
+    blue: colors.blue,
+    green: colors.green,
+    lightGray: colors.lightGray,
     bar: colors.green,
     text: colors.dark,
+    dark: colors.dark,
+    lightBlue: colors.lightBlue,
+    red: colors.red,
+    violet: colors.violet,
+    yellow: colors.yellow,
   },
   {
     primary: fonts.Lato,
@@ -64,7 +81,6 @@ class Presentation extends React.Component {
     return (
       <Deck transition={["fade"]} theme={theme} transitionDuration={300} progress="bar">
 
-        {/* Intro slide */}
         <Slide transition={["fade"]} notes="Introduce yourself" bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
           <Heading size={1} textSize="2em" textColor="white">
             Code-Splitting in React apps
@@ -82,73 +98,94 @@ class Presentation extends React.Component {
 
         <Slide bgColor="white">
           <Link alt="DataArt" href="http://dataart.com/" style={{ display: 'block' }} target="__blank">
-            <Image src={images.dataart.replace("/", "")} />
+            <Image width="70%" src={images.dataart.replace("/", "")} />
           </Link>
         </Slide>
 
-        {/* Talk plan slide */}
         <Slide transition={["fade"]}
+          bgColor="blue"
+        >
+          <Heading size={1} textColor="white">
+            What's code splitting?
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            🤔
+          </Heading>
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
           bgColor="white"
+          textColor="blue"
         >
-          <List style={{ lineHeight: '2.4em' }} textColor="dark">
-            <ListItem>What are higher-order components?</ListItem>
-            <ListItem>What are some use cases?</ListItem>
-            <ListItem>Using recompose & building custom HOCs</ListItem>
-          </List>
+          <BlockQuote>
+            <Quote>It allows you to split your code into various bundles which you can then load on demand.</Quote>
+            <Cite>
+              <Link href="https://webpack.js.org/" target="__blank" textColor="lightBlue">
+                webpack.js.org
+              </Link>
+            </Cite>
+          </BlockQuote>
         </Slide>
 
-        {/* What HOC are? */}
-        <Slide
-          transition={["fade"]}
-          notes={`
-                <ul>
-                  <li>let's do a recap - on the same page</li>
-                  <li>really fancy name for a really
-simple concept</li>
-                  <li>It's a function that accepts the component and returns a new component which behavior is enhanced.</li>
-                </ul>
-            `}
+        <Slide transition={["fade"]}
+          bgColor="blue"
         >
-          <Heading textColor="white" size={5} style={{ fontFamily: fonts.Monospace }}>
-            Component => EnhancedComponent
-            </Heading>
+          <Heading size={1} textColor="white">
+            Why split the code?
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            🙄
+          </Heading>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          notes={`
-              They might also accept some additional parameters.
-            `}
-        >
-          <Heading textColor="white" size={5} style={{ fontFamily: fonts.Monospace }}>
-            (arg1, arg2, Component) =>
-            </Heading>
-          <Heading textColor="white" size={5} style={{ fontFamily: fonts.Monospace }}>
-            EnhancedComponent
-            </Heading>
+        <Slide transition={["fade"]} bgImage={images.development.replace("/", "")} bgDarken={0.7}>
+          <Heading size={1} textColor="white">
+            http://localhost:3000/
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            😎
+          </Heading>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-
-          notes={`
-              Or they might use currying. Good reason for that.  
-            `}
-        >
-          <Heading textColor="white" size={5} style={{ fontFamily: fonts.Monospace }}>
-            (arg1, arg2) => (Component) =>
-            </Heading>
-          <Heading textColor="white" size={5} style={{ fontFamily: fonts.Monospace }}>
-            EnhancedComponent
-            </Heading>
+        <Slide transition={["fade"]} bgImage={images.lowConnection.replace("/", "")} bgDarken={0.6}>
+          <Heading size={1} textColor="white">
+            It can be slow...
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            😤
+          </Heading>
         </Slide>
 
-        {/* `connect` example */}
+        <Slide transition={["fade"]} bgImage={images.lowConnection2.replace("/", "")} bgDarken={0.6}>
+          <Heading size={1} textColor="white">
+            ... and expensive
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            😨
+          </Heading>
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="white">
+          <Image src={images.websiteOpeningProcess.replace("/", "")} width="100%" />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="blue">
+          <Terminal title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist>npm test</Typist>,
+            <div style={{ color: colors.green }}>TOTAL: 174 SUCCESS</div>,
+            <div>
+              <div>=============================== Coverage summary ===============================</div>
+              <div style={{ color: colors.red }}>Statements   : 51.29% ( 278/542 )</div>
+              <div style={{ color: colors.yellow }}>Branches     : 38.78% ( 95/245 )</div>
+              <div style={{ color: colors.yellow }}>Functions    : 46.21% ( 61/132 )</div>
+              <div style={{ color: colors.red }}>Lines        : 52.69% ( 274/520 )</div>
+              <div>================================================================================</div>
+            </div>]}
+          />
+        </Slide>
+
         <CodeSlide
-          notes={`
-              Let's take a look on concrete examples.
-              Describe how 'react-redux' work.
-            `}
           transition={["fade"]}
           lang="js"
           code={require("!raw!../assets/code/redux-connect.example")}
@@ -161,42 +198,7 @@ simple concept</li>
           ]}
         />
 
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.lightGray}
-        >
-          <Heading size={3} color="primary">
-            What can I do with HOC?
-            </Heading>
-          <List style={{ textAlign: "center" }}>
-            <ListItem>
-              Code reuse, logic abstraction
-              </ListItem>
-            <ListItem>
-              Render Highjacking
-              </ListItem>
-            <ListItem>
-              State abstraction and manipulation
-              </ListItem>
-            <ListItem>
-              Props manipulation
-              </ListItem>
-          </List>
-        </Slide>
-
-
-        {/* Props Proxy */}
         <CodeSlide
-          notes={`
-              <ul>
-                <li>You can read, add, edit and remove the props that are being passed 
-to the WrappedComponent.</li>
-                <li>You can abstract state by providing props and callbacks, 
-similar to how container deal with presentational.
-</li>
-                <li>Let's review this pattern first.</li>
-              </ul>  
-            `}
           transition={["fade"]}
           lang="js"
           code={require('!raw!../assets/code/props-proxy-1.example')}
@@ -215,35 +217,7 @@ similar to how container deal with presentational.
 
         <Slide
           transition={["fade"]}
-          bgColor={colors.lightGray}
-          notes={`
-              <ul>
-                <li>There's pattern in React that separating components according to certain
-types of responsibilities they have.</li>
-              </ul>  
-            `}
-        >
-          <Heading size={3} color="primary">
-            Container
-            </Heading>
-          <Heading size={3} color="primary">
-            vs.
-            </Heading>
-          <Heading size={3} color="primary">
-            Presentational
-            </Heading>
-          <Heading size={3} color="primary">
-            Components
-            </Heading>
-        </Slide>
-
-        <Slide
-          transition={["fade"]}
           bgColor={colors.dark}
-          notes={`
-            Some components are designed to be purely presentational. They simply
-accept props and return React elements.
-            `}
         >
           <CodePane
             lang="jsx"
@@ -253,154 +227,25 @@ accept props and return React elements.
           />
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.dark}
-          notes={`
-              <ul>
-                <li>
-                Another components perform more complex tasks: manage subs, fetch stuff, biz logic.
-                </li>
-                <li>These components
-are called Containers.</li>
-                <li>They do all the heavy job before passing
-down props</li>
-                <li>Some people call these Smart vs. Dumb components.</li>
-              </ul>  
-            `}
-        >
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/container-component-post.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.9em' }}
-          />
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.dark}>
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/fetch-post.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.65em' }}
-          />
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.dark}>
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/fetch-resource.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.65em' }}
-          />
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.dark}>
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/fetch-user.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.8em' }}
-          />
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.lightGray}>
-          <Heading size={3} color="primary">
-            Props Proxy
-            </Heading>
-          <Heading size={2} color="primary">
-            &
-            </Heading>
-          <Heading size={3} color="primary">
-            Inheritance Inversion
-            </Heading>
-        </Slide>
-
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.dark}
-          notes={`
-              <ul>
-                <li>(Enhancer) extends the WrappedComponent</li>
-                <li>called II, cause instead of the WrappedComponent 
-extending some Enhancer class</li>
-                <li>it is passively extended by the Enhancer</li>
-                <li>II allows the HOC to have access to the WrappedComponent 
-instance via this (state, props, component 
-lifecycle hooks)</li>
-              </ul>  
-            `}
-        >
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/inheritance-inversion.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.9em' }}
-          />
-        </Slide>
-
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.lightGray}
-        >
-          <Heading size={2} fit caps style={{ fontWeight: 300 }}>
-            Recompose
-            </Heading>
-        </Slide>
-
-        <Slide transition={["fade"]} bgImage={images.compose.replace("/", "")} bgDarken={0.55}>
-          <Heading size={3} textColor={colors.white}>
-            HOCs can be composed
-            </Heading>
-          <Heading size={3} textColor={colors.white}>
-            into more useful HOCs
-            </Heading>
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.dark}>
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/recompose-composed-post.example")}
-            margin="20px auto"
-            style={{ fontSize: '0.7em' }}
-          />
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.lightGray}>
-          <Heading size={2}>Pros</Heading>
-          <List style={{ textAlign: 'center', lineHeight: '2.2em' }}>
-            <ListItem>Less code dublication</ListItem>
-            <ListItem>Pushes to use composition pattern</ListItem>
-            <ListItem>Speed up development and refactoring</ListItem>
-          </List>
-        </Slide>
-
-        <Slide transition={["fade"]} bgColor={colors.lightGray}>
-          <Heading size={2}>Cons</Heading>
-          <List style={{ textAlign: 'center', lineHeight: '2.2em' }}>
-            <ListItem>More complex for newcomers</ListItem>
-            <ListItem>Expensive to change when abstraction is wrong</ListItem>
-            <ListItem>Performance cavets</ListItem>
-          </List>
-        </Slide>
-
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
-          <Heading size={1} textColor='primary'>Thank you!</Heading>
-          <List style={{ listStyle: 'none', textAlign: 'center' }}>
+          <Heading size={1} textColor='white' style={{ fontSize: '2.5em' }}>Thank you!</Heading>
+          <List style={{ listStyle: 'none', textAlign: 'center' }} textColor="white">
             <ListItem>
-              <Link textColor="primary" href="http://suevalov.com" target="__blank">Alex Suevalov</Link>
+              <Link textColor="primary" href="http://suevalov.com" target="__blank" textColor="white">Alex Suevalov</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="https://twitter.com/Suevalov" target="__blank">@suevalov</Link>
+              <Link textColor="primary" href="https://twitter.com/Suevalov" target="__blank" textColor="white">@suevalov</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="http://dataart.com" target="__blank">DataArt</Link>
+              <Link textColor="primary" href="http://suevalov.com/" target="__blank" textColor="white">suevalov.com</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="mailto:suevalov.me@gmail.com" target="__blank">suevalov.me@gmail.com</Link>
+              <Link textColor="primary" href="https://github.com/suevalov" target="__blank" textColor="white">https://github.com/suevalov</Link>
             </ListItem>
-            <ListItem>
-              <Link textColor="primary" href="https://github.com/suevalov" target="__blank">https://github.com/suevalov</Link>
+            <ListItem style={{ marginTop: 40 }}>
+              <Link textColor="primary" href="http://dataart.com" target="__blank" textColor="white">
+                <Image width="40%" src={images.dataart.replace("/", "")} style={{ backgroundColor: 'white' }} />
+              </Link>
             </ListItem>
           </List>
         </Slide>

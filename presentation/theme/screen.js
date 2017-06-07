@@ -34,10 +34,14 @@ const screen = (colors, fonts) => {
         zIndex: 9999,
         background: "none",
         border: "none",
-        outline: 0
+        outline: 0,
       },
       prevIcon: {
-        fill: colors.quartenary
+        fill: colors.quartenary,
+        opacity: 0.3,
+        ":hover": {
+          opacity: 0.7,
+        }
       },
       next: {
         position: "absolute",
@@ -47,10 +51,14 @@ const screen = (colors, fonts) => {
         zIndex: 9999,
         background: "none",
         border: "none",
-        outline: 0
+        outline: 0,
       },
       nextIcon: {
-        fill: colors.quartenary
+        fill: colors.quartenary,
+        opacity: 0.3,
+        ":hover": {
+          opacity: 0.7,
+        }
       }
     },
     progress: {
@@ -139,7 +147,7 @@ const screen = (colors, fonts) => {
         paddingLeft: 40,
         display: "block",
         color: colors.primary,
-        fontSize: "4.9rem",
+        fontSize: "3rem",
         lineHeight: 1,
         fontWeight: "bold"
       },
