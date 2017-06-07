@@ -48,7 +48,9 @@ const images = {
   lowConnection2: require('../assets/low-connectivity-2.jpg'),
   websiteOpeningProcess: require('../assets/website_opening_process.png'),
   noWords: require('../assets/no-words.gif'),
-  interactive: require('../assets/interactive.png')
+  interactive: require('../assets/interactive.png'),
+  split: require('../assets/split.gif'),
+  codeSplittings: require('../assets/code-splitting.png'),
 };
 
 preloader(images);
@@ -173,7 +175,7 @@ class Presentation extends React.Component {
         </Slide>
 
         <Slide transition={[]} bgColor="blue">
-          <Terminal title="1. suevalov@suevalov: ~(zsh)" output={[
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
             <div>create-react-app just-few-dependencies</div>,
             <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
             <div>
@@ -190,8 +192,8 @@ class Presentation extends React.Component {
         </Slide>
 
         <Slide transition={[]} bgColor="blue">
-          <Terminal title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn add draft-js moment emojione</Typist>,
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
+            <div>yarn add draft-js moment emojione</div>,
             <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
             <div>
               <div>                                                      </div>
@@ -214,10 +216,170 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">...</Heading>
         </Slide>
 
+
+        <Slide transition={["fade"]} bgImage={images.split.replace("/", "")} bgDarken={0.6}>
+          <Heading size={1} textColor="white">
+            It's time to split it
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            💪
+          </Heading>
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="green"
+        >
+          <Heading size={1} textColor="white">Code Splitting Formats</Heading>
+          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              require.ensure
+            </ListItem>
+            <ListItem>
+              dynamic import
+            </ListItem>
+          </List>
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">require.ensure</Heading>
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.6em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+/*
+  1. Specific to Webpack.
+  2. Works in both Webpack 1 & 2  
+  3. Will be deprecated and replaced by import
+  4. Relies on Promise. Don't forget to shim.
+*/
+
+require.ensure(
+  dependencies: Array<string>, 
+  callback: (require) => void, 
+  errorCallback?: (error) => void, 
+  chunkName?: string
+)
+            `}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+function determineDate() {
+  require.ensure([], function(require) {
+    var moment = require('moment');
+    console.log(moment().format());
+  });
+}
+
+determineDate();
+            `}
+          />
+        </Slide>
+
+        <Slide transition={[]} bgColor="blue">
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
+            <div>
+              <div>                                                      </div>
+              <div>Creating an optimized production build...</div>
+              <div style={{ color: colors.green }}>Compiled successfully.</div>
+              <div>                                                      </div>
+              <div>File sizes after gzip:</div>
+              <div>172.75 KB <span style={{ color: colors.green }}>(-15.88 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.b9eed592.js</span></div>
+              <div>16.64 KB               build/static/js/<span style={{ color: colors.green }}>0.40f5f41a.chunk.js</span></div>
+              <div>289 B                  build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
+            </div>,
+          ]}
+          />
+        </Slide>
+
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+function determineDate() {
+  require.ensure([], function(require) {
+    var moment = require('moment');
+    console.log(moment().format());
+  }, 'my-first-bundle'); // <-- we've added name
+}
+
+determineDate();
+            `}
+          />
+        </Slide>
+
+
+        <Slide transition={[]} bgColor="blue">
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
+            <div>
+              <div>                                                      </div>
+              <div>Creating an optimized production build...</div>
+              <div style={{ color: colors.green }}>Compiled successfully.</div>
+              <div>                                                      </div>
+              <div>File sizes after gzip:</div>
+              <div>172.75 KB <span style={{ color: colors.green }}>(-15.88 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.b9eed592.js</span></div>
+              <div>16.64 KB               build/static/js/<span style={{ color: colors.green }}>my-first-bundle.2eebcbb4.chunk.js</span></div>
+              <div>289 B                  build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
+            </div>,
+          ]}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="white">
+          <Image src={images.codeSplittings.replace("/", "")} width="100%" />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={require("raw!../assets/code/example-1.example")}
+            margin="20px auto"
+            style={{ fontSize: '0.6em' }}
+          />
+        </Slide>
+
         <CodeSlide
           transition={["fade"]}
           lang="js"
-          code={require("!raw!../assets/code/redux-connect.example")}
+          code={''}
           ranges={[
             { loc: [0, 1], title: 'react-redux' },
             { loc: [1, 2] },
@@ -226,35 +388,6 @@ class Presentation extends React.Component {
             { loc: [14, 17], note: '(arg1, arg2) => (Component) => EnhancedComponent' }
           ]}
         />
-
-        <CodeSlide
-          transition={["fade"]}
-          lang="js"
-          code={require('!raw!../assets/code/props-proxy-1.example')}
-          style={{ fontSize: '0.8em' }}
-          ranges={[
-            { loc: [0, 1], title: 'Props Proxy' },
-            { loc: [2, 3] },
-            { loc: [4, 18] },
-            { loc: [21, 22] },
-            { loc: [25, 26] },
-            { loc: [27, 36] },
-            { loc: [37, 38] },
-            { loc: [41, 42] }
-          ]}
-        />
-
-        <Slide
-          transition={["fade"]}
-          bgColor={colors.dark}
-        >
-          <CodePane
-            lang="jsx"
-            source={require("raw!../assets/code/presentational-component-post.example")}
-            margin="20px auto"
-            style={{ fontSize: '1em' }}
-          />
-        </Slide>
 
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
           <Heading size={1} textColor='white' style={{ fontSize: '2.5em' }}>Thank you!</Heading>

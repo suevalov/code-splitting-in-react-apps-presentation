@@ -1,4 +1,0 @@
-const fetchUser = fetchResource(props =>
-  fetch(`/users/${props.id}`)
-);
-const UserContainer = fetchUser(User);

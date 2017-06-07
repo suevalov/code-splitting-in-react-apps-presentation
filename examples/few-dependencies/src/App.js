@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import 'draft-js';
-import 'moment';
 import 'emojione';
 import logo from './logo.svg';
 import './App.css';
+
+function determineDate() {
+  require.ensure([], function (require) {
+    var moment = require('moment');
+    console.log(moment().format());
+  }, 'my-first-bundle');
+}
+
+determineDate();
 
 class App extends Component {
   render() {

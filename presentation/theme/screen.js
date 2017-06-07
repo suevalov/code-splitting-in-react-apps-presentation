@@ -244,9 +244,9 @@ const screen = (colors, fonts) => {
       },
       list: {
         textAlign: "left",
-        listStylePosition: "inside",
+        // listStylePosition: "inside",
         padding: 0,
-        listStyleType: "none"
+        // listStyleType: "none"
       },
       s: {
         strikethrough: {}
