@@ -47,6 +47,8 @@ const images = {
   lowConnection: require('../assets/low-connectivity.jpg'),
   lowConnection2: require('../assets/low-connectivity-2.jpg'),
   websiteOpeningProcess: require('../assets/website_opening_process.png'),
+  noWords: require('../assets/no-words.gif'),
+  interactive: require('../assets/interactive.png')
 };
 
 preloader(images);
@@ -79,7 +81,7 @@ const theme = createTheme(
 class Presentation extends React.Component {
   render() {
     return (
-      <Deck transition={["fade"]} theme={theme} transitionDuration={300} progress="bar">
+      <Deck transition={[]} theme={theme} transitionDuration={300} progress="bar">
 
         <Slide transition={["fade"]} notes="Introduce yourself" bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
           <Heading size={1} textSize="2em" textColor="white">
@@ -170,19 +172,46 @@ class Presentation extends React.Component {
           <Image src={images.websiteOpeningProcess.replace("/", "")} width="100%" />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="blue">
+        <Slide transition={[]} bgColor="blue">
           <Terminal title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist>npm test</Typist>,
-            <div style={{ color: colors.green }}>TOTAL: 174 SUCCESS</div>,
+            <div>create-react-app just-few-dependencies</div>,
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
             <div>
-              <div>=============================== Coverage summary ===============================</div>
-              <div style={{ color: colors.red }}>Statements   : 51.29% ( 278/542 )</div>
-              <div style={{ color: colors.yellow }}>Branches     : 38.78% ( 95/245 )</div>
-              <div style={{ color: colors.yellow }}>Functions    : 46.21% ( 61/132 )</div>
-              <div style={{ color: colors.red }}>Lines        : 52.69% ( 274/520 )</div>
-              <div>================================================================================</div>
-            </div>]}
+              <div>                                                      </div>
+              <div>Creating an optimized production build...</div>
+              <div style={{ color: colors.green }}>Compiled successfully.</div>
+              <div>                                                      </div>
+              <div>File sizes after gzip:</div>
+              <div>47.09 KB (151 KB)  build/static/js/<span style={{ color: colors.green }}>main.8b0e51a6.js</span></div>
+              <div>289 B     build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
+            </div>,
+          ]}
           />
+        </Slide>
+
+        <Slide transition={[]} bgColor="blue">
+          <Terminal title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn add draft-js moment emojione</Typist>,
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
+            <div>
+              <div>                                                      </div>
+              <div>Creating an optimized production build...</div>
+              <div style={{ color: colors.green }}>Compiled successfully.</div>
+              <div>                                                      </div>
+              <div>File sizes after gzip:</div>
+              <div><span style={{ color: colors.red }}>188.63 KB (851 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.0b364eff.js</span></div>
+              <div>289 B     build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
+            </div>,
+          ]}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="white">
+          <Image src={images.interactive.replace("/", "")} width="100%" />
+        </Slide>
+
+        <Slide transition={["fade"]} bgImage={images.noWords.replace("/", "")}>
+          <Heading size={1} textColor="white">...</Heading>
         </Slide>
 
         <CodeSlide

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import 'draft-js';
+import 'moment';
+import 'emojione';
 import logo from './logo.svg';
 import './App.css';
 
