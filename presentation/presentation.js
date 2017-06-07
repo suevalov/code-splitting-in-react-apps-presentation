@@ -360,6 +360,176 @@ determineDate();
           />
         </Slide>
 
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">Dependencies as Parameter</Heading>
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.5em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+require.ensure(
+  // Modules to load, but not execute yet
+  ['./load-earlier'],
+  () => {
+    const loadEarlier = require('./load-earlier');
+    // Load later on demand and include to the same chunk
+    const module1 = require('./module1');
+    const module2 = require('./module2');
+  },
+  err => console.error(err),
+  'optional-name'
+);
+            `}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">
+            <Link href="https://github.com/tc39/proposal-dynamic-import" target="__blank" textColor="white">
+              import()
+            </Link>
+          </Heading>
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.6em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+/*
+  1. Official TC39 proposal. Stage 3.
+  2. Not specific to Webpack.
+  3. Supported in Webpack 2.
+  4. Returns a Promise.
+  5. Accepts dynamic module names.
+  6. Babel plugin: syntax-dynamic-import
+*/
+
+import(path: string)
+  .then((module) => ...)
+  .catch((error) => ...)
+            `}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            style={{
+              backgroundColor: colors.dark,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0.5em auto"
+            lang="javascript"
+            source={`
+function determineDate() {
+  import(/* webpackChunkName: "my-first-plugin" */ 'moment')
+    .then((moment) => {
+      console.log(moment().format());
+    });
+}
+
+determineDate();
+            `}
+          />
+        </Slide>
+
+
+        <Slide transition={["fade"]} bgColor="blue">
+          <Heading size={1} textColor="white">
+            Setting Up Dynamic Imports
+          </Heading>
+          <CodePane
+            style={{
+              backgroundColor: colors.blue,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0 auto"
+            lang="bash"
+            source={`
+yarn add babel-eslint --dev`}
+          />
+          <CodePane
+            style={{
+              backgroundColor: colors.blue,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0 auto"
+            lang="javascript"
+            source={`// .eslintrc.js
+module.exports = {
+  ...
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module',
+    allowImportExportEverywhere: true,
+  },
+  ...
+}
+            `}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="blue">
+          <Heading size={1} textColor="white">
+            Setting Up Dynamic Imports
+          </Heading>
+          <CodePane
+            style={{
+              backgroundColor: colors.blue,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0 auto"
+            lang="bash"
+            source={`
+yarn add babel-plugin-syntax-dynamic-import --dev`}
+          />
+          <CodePane
+            style={{
+              backgroundColor: colors.blue,
+              fontSize: '0.7em',
+              maxWidth: 'initial',
+              minWidth: 'initial',
+              width: '80%'
+            }}
+            margin="0 auto"
+            lang="javascript"
+            source={`// .babelrc
+{
+  "plugins": ["syntax-dynamic-import"],
+  ...
+}`}
+          />
+        </Slide>
+
         <Slide transition={["fade"]} bgColor="white">
           <Image src={images.codeSplittings.replace("/", "")} width="100%" />
         </Slide>

@@ -5,10 +5,10 @@ import logo from './logo.svg';
 import './App.css';
 
 function determineDate() {
-  require.ensure([], function (require) {
-    var moment = require('moment');
-    console.log(moment().format());
-  }, 'my-first-bundle');
+  import(/* webpackChunkName: "my-first-plugin" */ 'moment')
+    .then((moment) => {
+      console.log(moment().format());
+    });
 }
 
 determineDate();
