@@ -19,6 +19,7 @@ import {
   BlockQuote,
   Quote,
   Cite,
+  Appear,
 } from "spectacle";
 
 import colors from './theme/colors';
@@ -51,6 +52,8 @@ const images = {
   interactive: require('../assets/interactive.png'),
   split: require('../assets/split.gif'),
   codeSplittings: require('../assets/code-splitting.png'),
+  giantVsRoute: require('../assets/giant-vs-route.png'),
+  routesVsComponents: require('../assets/routes-vs-components.png'),
 };
 
 preloader(images);
@@ -530,21 +533,126 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           />
         </Slide>
 
+        <Slide transition={["fade"]}
+          bgColor="green"
+        >
+          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              Route-based splitting
+            </ListItem>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              Async components splitting
+            </ListItem>
+            <ListItem>
+              Vendor splitting
+            </ListItem>
+          </List>
+        </Slide>
+
         <Slide transition={["fade"]} bgColor="white">
           <Image src={images.codeSplittings.replace("/", "")} width="100%" />
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="white"
+        >
+          <Heading size={1} textColor="blue">Route-based splitting</Heading>
+          <Layout>
+            <Fill>
+              <Image style={{ marginTop: 30 }} width="90%" src={images.giantVsRoute.replace("/", "")} />
+            </Fill>
+            <Fill>
+              <List textColor="blue" style={{ listStyle: 'none' }}>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  The best place to start
+                </ListItem>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Potentially max size reduction
+                </ListItem>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Router needs to be async aware
+                </ListItem>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Beware of code duplication in output
+                </ListItem>
+              </List>
+            </Fill>
+          </Layout>
         </Slide>
 
         <Slide
           transition={["fade"]}
           bgColor="dark"
         >
+          <Heading size={1} textColor="white">React Router v3 with import()</Heading>
           <CodePane
-            lang="js"
-            source={require("raw!../assets/code/example-1.example")}
+            lang="jsx"
+            source={`<Route path="/" component={App}>
+    <Route
+      path="/login"
+      getComponent={(_, cb) => {
+          import(/* webpackChunkName: "login-bundle" */ './Login')
+            .then(module => module.default)
+            .then(Component => cb(null, Component))
+            .catch(e => cb(e, null));
+      }}
+    />
+    {/* ... */}
+</Route>
+`}
             margin="20px auto"
             style={{ fontSize: '0.6em' }}
           />
         </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">React Router v3 with require.ensure</Heading>
+          <CodePane
+            lang="jsx"
+            source={`<Route path="/" component={App}>
+    <Route
+      path="/login"
+      getComponent={(_, cb) => {
+          require.ensure([], 
+            (require) => { cb(null, require('./Login'))}, 
+            (e) => { cb(e, null); },
+            'login-bundle')
+      }}
+    />
+    {/* ... */}
+</Route>
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em' }}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]}
+          bgColor="white"
+        >
+          <Heading size={1} textColor="blue">Async components splitting</Heading>
+          <Layout>
+            <Fill>
+              <Image style={{ marginTop: 30 }} width="90%" src={images.routesVsComponents.replace("/", "")} />
+            </Fill>
+            <Fill>
+              <List textColor="blue" style={{ listStyle: 'none' }}>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Best cases are modals, tabs, popups or components that are not visible in viewport
+                </ListItem>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Convenient to use as HOC
+                </ListItem>
+                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                  Enables conditional patterns
+                </ListItem>
+              </List>
+            </Fill>
+          </Layout>
+        </Slide>        
 
         <CodeSlide
           transition={["fade"]}
