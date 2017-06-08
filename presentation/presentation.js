@@ -1223,7 +1223,10 @@ function isVendor({ resource }) {
 
         <Slide transition={["fade"]} bgImage={images.analyze.replace("/", "")} bgDarken={0.7}
           notes={`
-            Analyzing build statistics is a good step towards understanding webpack better. Visualizing them helps you to understand the composition of your bundles.
+            <ul>
+              <li>Analyzing build statistics is a good step towards understanding webpack better.</li>
+              <li>Visualizing them helps you to understand the composition of your bundles.</li>
+            </ul>
           `}
         >
           <Heading size={1} textColor="white">Analyzing Build Statistics</Heading>
