@@ -1,6 +1,6 @@
-# Mastering HOC with Recompose
+# Code-Splitting in React apps
 
-The talk for [**ReactJS Wroclaw** Meeting](http://www.meetup.com/ReactJS-Wroclaw/events/233719878/).
+The talk for [**React Poznan** Meeting](https://www.meetup.com/React-Poznan/events/240294658/).
 
 ## Build & Deployment
 

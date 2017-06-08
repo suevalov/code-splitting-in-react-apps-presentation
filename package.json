@@ -1,7 +1,7 @@
 {
-  "name": "mastering-hoc-with-recompose",
+  "name": "code-splitting-in-react-apps-presentation",
   "version": "1.0.1",
-  "description": "The talk for ReactJS Wroclaw Meeting",
+  "description": "The talk for ReactJS Poznan Meeting",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf dist",

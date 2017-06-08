@@ -54,6 +54,12 @@ const images = {
   giantVsRoute: require('../assets/giant-vs-route.png'),
   routesVsComponents: require('../assets/routes-vs-components.png'),
   happy: require('../assets/happy.gif'),
+  commonChunks: require('../assets/common-chunks.png'),
+  comomnChunksAsync: require('../assets/commonschunk-async-children.png'),
+  analyze: require('../assets/analyze.jpg'),
+  sourceMap: require('../assets/source-map-analizer.png'),
+  realPhone: require('../assets/real-phone.jpg'),
+  waterfalls: require('../assets/waterfalls.jpg')
 };
 
 preloader(images);
@@ -952,23 +958,218 @@ class MyComponent extends React.Component {
           </List>
         </Slide>
 
+        <Slide transition={["fade"]} bgColor="white">
+          <Heading textColor="blue" size={1}>CommonsChunkPlugin</Heading>
+          <Image src={images.commonChunks.replace("/", "")} width="80%" />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={`{
+  ...,
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks(module, count) {
+            return isVendor(module);
+        },
+    }),
+  ]
+}
+
+function isVendor({ resource }) {
+  return resource &&
+    resource.indexOf('node_modules') >= 0 &&
+    resource.match(/\.js$/);
+}
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={`{
+  ...,
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks(module, count) {
+            return isVendor(module) && count > 2;
+        },
+    }),
+  ]
+}
+
+function isVendor({ resource }) {
+  return resource &&
+    resource.indexOf('node_modules') >= 0 &&
+    resource.match(/\.js$/);
+}
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={`new webpack.optimize.CommonsChunkPlugin({
+    async: 'react-dnd',
+    minChunks(module, count) {
+        var context = module.context;
+        var targets = [
+          'react-dnd', 'react-dnd-html5-backend', 
+          'react-dnd-touch-backend', 'dnd-core'
+        ];
+        return context && context.indexOf('node_modules') >= 0 && 
+                targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context));
+    },
+}),
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="white">
+          <Heading textColor="blue" size={1} style={{ marginBottom: 40 }}>CommonsChunkPlugin</Heading>
+          <Image src={images.comomnChunksAsync.replace("/", "")} width="80%" />
+        </Slide>
+
+        <Slide transition={["fade"]} bgImage={images.analyze.replace("/", "")} bgDarken={0.7}>
+          <Heading size={1} textColor="white">Analyzing Build Statistics</Heading>
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={`// package.json
+{
+  ...,
+  "scripts": {
+    "stats": "webpack --env production --profile --json > stats.json",
+    ...
+  },
+  ...
+}`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="green">
+          <Heading size={1} textColor="white">
+            <Link href="https://survivejs.com/webpack/optimizing/analyzing-build-statistics/" target="__blank" textColor="white">
+              Different tools to visualize
+            </Link>
+          </Heading>
+           <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            🛠
+          </Heading>
+        </Slide>
+
+         <Slide transition={["fade"]} bgColor="green">
+          <Heading textColor="white" size={1} style={{ fontSize: '2em' }}>
+            <Link href="https://github.com/thejameskyle/react-loadable" target="__blank" textColor="white">source-map-explorer</Link>
+          </Heading>
+          <Heading textColor="white" size={5} style={{ marginBottom: 20 }}>🔎 Analyze and debug space usage through source maps.</Heading>
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn global add source-map-explorer</Typist>,
+            <div>
+              <div>[1/4] 🔍  Resolving packages...</div>
+              <div>[2/4] 🚚  Fetching packages...</div>
+              <div>[3/4] 🔗  Linking dependencies...</div>
+              <div>[4/4] 📃  Building fresh packages...</div>
+              <div><span style={{ color: colors.green }}>success</span> Installed "source-map-explorer@1.3.3" with binaries:</div>
+              <div>- source-map-explorer</div>
+              <div>✨  Done in 7.88s.</div>
+            </div>,
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>source-map-explorer build/static/js/main.885e7e1b.js</Typist>,
+          ]}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="white">
+          <Image src={images.sourceMap.replace("/", "")} width="100%" />
+        </Slide>
+
+        <Slide transition={["fade"]} bgImage={images.realPhone.replace("/", "")} bgDarken={0.7}>
+          <Heading size={1} textColor="white">
+            Profile on real devices
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            📲
+          </Heading>
+        </Slide>
+
+
+        <Slide transition={["fade"]} bgImage={images.waterfalls.replace("/", "")} bgDarken={0.7}>
+          <Heading size={1} textColor="white">
+            Avoid request waterfalls
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            💀
+          </Heading>
+        </Slide>
+
+
+        <Slide transition={["fade"]} bgColor="blue">
+          <Heading size={1} textColor="white">
+            Resources
+          </Heading>
+          <List ordered textColor="white">
+            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
+              <Link href="https://addyosmani.com/blog/progressive-web-apps-with-react/" target="__blank" textColor="white">Addy Osmani: PWA with React</Link>
+            </ListItem>
+            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
+              <Link href="https://www.youtube.com/watch?v=QH94CXVv3UE" target="__blank" textColor="white">Totally Tooling Tips S3, E15</Link>
+            </ListItem>
+            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
+              <Link href="https://medium.com/@adamrackis/vendor-and-code-splitting-in-webpack-2-6376358f1923" target="__blank" textColor="white">Vendor code splitting in Webpack 2</Link>
+            </ListItem>
+            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
+              <Link href="https://survivejs.com/webpack/introduction/" target="__blank" textColor="white">https://survivejs.com/webpack</Link>
+            </ListItem>
+            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
+              <Link href="https://webpack.js.org/guides/code-splitting/" target="__blank" textColor="white">https://webpack.js.org/</Link>
+            </ListItem>
+          </List>
+        </Slide>
+
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
           <Heading size={1} textColor='white' style={{ fontSize: '2.5em' }}>Thank you!</Heading>
           <List style={{ listStyle: 'none', textAlign: 'center' }} textColor="white">
             <ListItem>
-              <Link textColor="primary" href="http://suevalov.com" target="__blank" textColor="white">Alex Suevalov</Link>
+              <Link href="http://suevalov.com" target="__blank" textColor="white">Alex Suevalov</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="https://twitter.com/Suevalov" target="__blank" textColor="white">@suevalov</Link>
+              <Link href="https://twitter.com/Suevalov" target="__blank" textColor="white">@suevalov</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="http://suevalov.com/" target="__blank" textColor="white">suevalov.com</Link>
+              <Link href="http://suevalov.com/" target="__blank" textColor="white">suevalov.com</Link>
             </ListItem>
             <ListItem>
-              <Link textColor="primary" href="https://github.com/suevalov" target="__blank" textColor="white">https://github.com/suevalov</Link>
+              <Link href="https://github.com/suevalov" target="__blank" textColor="white">https://github.com/suevalov</Link>
             </ListItem>
             <ListItem style={{ marginTop: 40 }}>
-              <Link textColor="primary" href="http://dataart.com" target="__blank" textColor="white">
+              <Link href="http://dataart.com" target="__blank" textColor="white">
                 <Image width="40%" src={images.dataart.replace("/", "")} style={{ backgroundColor: 'white' }} />
               </Link>
             </ListItem>
