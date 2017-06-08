@@ -94,7 +94,13 @@ class Presentation extends React.Component {
     return (
       <Deck transition={[]} theme={theme} transitionDuration={300} progress="bar">
 
-        <Slide transition={["fade"]} notes="Introduce yourself" bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
+        <Slide transition={["fade"]} notes={`
+            <ul>
+              <li>Introduce yourself</li>
+              <li>About splitting bundles and saving traffic</li>
+              <li>Disclaimer: this presentation is not code-splitted</li>
+            </ul>        
+`} bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
           <Heading size={1} textSize="2em" textColor="white">
             Code-Splitting in React apps
           </Heading>
@@ -109,7 +115,12 @@ class Presentation extends React.Component {
           </Link>
         </Slide>
 
-        <Slide bgColor="white">
+        <Slide bgColor="white" notes={`
+          <ul>
+            <li>Technology Consultancy & Solution Desing</li>
+            <li>Wroclaw & Lublin</li>
+          </ul>
+        `}>
           <Link alt="DataArt" href="http://dataart.com/" style={{ display: 'block' }} target="__blank">
             <Image width="70%" src={images.dataart.replace("/", "")} />
           </Link>
@@ -117,6 +128,10 @@ class Presentation extends React.Component {
 
         <Slide transition={["fade"]}
           bgColor="blue"
+          notes={`
+            Hands up who knows about code splitting?
+            Who have ever used it in apps?
+          `}
         >
           <Heading size={1} textColor="white">
             What's code splitting?
@@ -130,6 +145,16 @@ class Presentation extends React.Component {
           transition={["fade"]}
           bgColor="white"
           textColor="blue"
+          notes={`
+            <ul>
+              <li>like when a user navigates to a matching route</li>
+              <li>been doing some research</li>
+              <li>a lot of people are confused by code splitting</li>
+              <li>"Let's me just ship my app and six month later I'll think about it".</li>
+              <li>code-splitting is really easy</li>
+              <li>getting to this point - read a billion of blog posts</li>
+            </ul>
+          `}
         >
           <BlockQuote>
             <Quote>It allows you to split your code into various bundles which you can then load on demand.</Quote>
@@ -143,6 +168,11 @@ class Presentation extends React.Component {
 
         <Slide transition={["fade"]}
           bgColor="blue"
+          notes={`
+            <ul>
+              <li>let's try to answer this question first</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">
             Why split the code?
@@ -152,7 +182,17 @@ class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.development.replace("/", "")} bgDarken={0.7}>
+        <Slide transition={["fade"]} 
+          bgImage={images.development.replace("/", "")} 
+          bgDarken={0.7}
+          notes={`
+            <ul>
+            <li>most of developers work on really powerful computers, with a lot of RAM, CPU, etc.</li>
+            <li>local website, fiber speed</li>
+            <li>deployed at the same network</li>
+            </ul>
+          `}
+        >
           <Heading size={1} textColor="white">
             http://localhost:3000/
           </Heading>
@@ -161,7 +201,15 @@ class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.lowConnection.replace("/", "")} bgDarken={0.6}>
+        <Slide transition={["fade"]} 
+          bgImage={images.lowConnection.replace("/", "")} 
+          bgDarken={0.6}
+          notes={`
+            <ul>
+              <li>Real life is different</li>
+            </ul>
+          `}
+        >
           <Heading size={1} textColor="white">
             It can be slow...
           </Heading>
@@ -170,7 +218,18 @@ class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.lowConnection2.replace("/", "")} bgDarken={0.6}>
+        <Slide transition={["fade"]} bgImage={images.lowConnection2.replace("/", "")} bgDarken={0.6}
+          notes={`
+            <ul>
+              <li>Mobile web speeds matter.</li>
+              <li>On average, faster experiences lead to 70% longer sessions and 2 x more mobile ad revenue</li>
+              <li>Flipkart Lite triple time-on-site</li>
+              <li>GQ get an 80% increase in traffic</li>
+              <li>Trainline make an additional 11M in yearly revenue</li>
+              <li>Instagram increase impressions by 33%</li>
+            </ul>
+          `}
+        >
           <Heading size={1} textColor="white">
             ... and expensive
           </Heading>
@@ -179,11 +238,28 @@ class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white">
+        <Slide transition={["fade"]} 
+          bgColor="white"
+          notes={`
+            <ul>
+              <li>There are a few key user moments in loading up your web app.</li>
+              <li>Performance goals</li>
+              <li>be interactive <5s on first visit & <2s on repeat visits</li>
+              <li>Optimizing for interactivity means making the app usable for users asap</li>
+              <li>critical for modern web experiences trying to provide first-class user experiences on mobile.</li>
+            </ul>
+          `}
+        >
           <Image src={images.websiteOpeningProcess.replace("/", "")} width="100%" />
         </Slide>
 
-        <Slide transition={[]} bgColor="blue">
+        <Slide transition={[]} bgColor="blue"
+          notes={`
+            <ul>
+              <li>It's not that easy to achieve</li>
+            </ul>
+          `}
+        >
           <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
             <div>create-react-app just-few-dependencies</div>,
             <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
@@ -237,6 +313,11 @@ class Presentation extends React.Component {
 
         <Slide transition={["fade"]}
           bgColor="green"
+          notes={`
+            <ul>
+              <li>Code splitting can be done in two primary ways in webpack.</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">Code Splitting Formats</Heading>
           <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
@@ -251,6 +332,13 @@ class Presentation extends React.Component {
 
         <Slide transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>Webpack statically parses it while building</li>
+              <li>Any module that is referenced as a dependency or require()d within the callback function, will be added to a new chunk.</li>
+              <li>The bundle will be async loaded then the code is executed</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">require.ensure</Heading>
           <CodePane
@@ -403,6 +491,12 @@ require.ensure(
 
         <Slide transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>The dynamic import syntax isn't in the official language specification yet.</li>
+              <li>To use it, minor tweaks are needed especially at ESLint and Babel.</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">
             <Link href="https://github.com/tc39/proposal-dynamic-import" target="__blank" textColor="white">
@@ -555,7 +649,15 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white">
+        <Slide transition={["fade"]} bgColor="white"
+          notes={`
+            <ul>
+              <li>imagine the application</li>
+              <li>serve the needed and dinamically load the rest</li>
+              <li>A common piece of advice you will see is to break your app into separate routes and load each one asynchronously.</li>
+            </ul>
+          `}
+        >
           <Image src={images.codeSplittings.replace("/", "")} width="100%" />
         </Slide>
 
@@ -639,6 +741,13 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 
         <Slide transition={["fade"]}
           bgColor="green"
+          notes={`
+            <ul>
+              <li>we can do better than that</li>
+              <li>usually a route is simply a component</li>
+              <li>so what if we optimized around components instead of delegating that responsibility to routes? What would that buy us?</li>
+            </ul>
+          `}
         >
           <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
             <ListItem style={{ marginBottom: '0.5em' }}>
@@ -655,6 +764,14 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 
         <Slide transition={["fade"]}
           bgColor="white"
+          notes={`
+            <ul>
+              <li>It turns out quite a lot</li>
+              <li>There are many more places than just routes where you can pretty easily split apart your app.</li>
+              <li>Modals, tabs, and many more UI components hide content until the user has done something to reveal it</li>
+              <li>All the places where you can defer loading content until higher priority content is finished loading</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="blue">Async components splitting</Heading>
           <Layout>
@@ -678,6 +795,9 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
         </Slide>        
 
         <CodeSlide
+          notes={`
+              But we need to make splitting up at the component-level as easy as splitting at the route-level. To split in a new place should be as easy as changing a few lines of app code and everything else is automatic.
+          `}
           transition={["fade"]}
           lang="js"
           code={`class AsyncComponent extends React.Component {
@@ -753,6 +873,13 @@ const AsyncLogin = makeItAsync(loader);
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>Seems really promising, but few questions are unanswered</li>
+              <li>What about when the import() fails?</li>
+              <li>or Flash of Loading Component problem?</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">React Router v4</Heading>
           <CodePane
@@ -773,7 +900,11 @@ const App = () =>
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="green">
+        <Slide transition={["fade"]} bgColor="green"
+          notes={`
+            Instead you can use Loadable to abstract away the problem. Using Loadable is simple.
+          `}
+        >
           <Heading textColor="white" size={1} style={{ fontSize: '2em' }}>
             <Link href="https://github.com/thejameskyle/react-loadable" target="__blank" textColor="white">react-loadable</Link>
           </Heading>
@@ -797,6 +928,9 @@ const App = () =>
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+            All you need to do is pass in a function which loads your component and a “Loading” component to show while your component loads.
+          `}
         >
           <CodePane
             lang="jsx"
@@ -853,6 +987,13 @@ class MyComponent extends React.Component {
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+          <ul>
+            <li>Sometimes components load really quickly (<200ms) and the loading screen only quickly flashes on the screen.</li>
+            <li>studies have proven that this causes users to perceive things taking longer than they really have.</li>
+            <li>If you don’t show anything, users perceive it as being faster.</li>
+          </ul>
+          `}
         >
           <Heading size={1} textColor="white">Avoiding Flash Of Loading Component</Heading>
           <CodePane
@@ -879,6 +1020,11 @@ Loadable({
         </Slide>
 
         <CodeSlide
+          notes={`
+            <ul>
+              <li>You can also tie loading to a specific action like scrolling or clicking a button.</li>
+            </ul>
+          `}
           transition={["fade"]}
           lang="js"
           code={`let LoadableMyComponent = Loadable({
@@ -923,6 +1069,12 @@ class MyComponent extends React.Component {
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>You could also try to predict what the user is trying to do next and load code based on your guess.</li>
+              <li>This way the functionality would be already there as the user tries to access it.</li>
+            </ul>
+          `}
         >
           <Heading size={1} textColor="white">We can go deeper...</Heading>
           <CodePane
@@ -944,6 +1096,9 @@ class MyComponent extends React.Component {
 
         <Slide transition={["fade"]}
           bgColor="green"
+          notes={`
+            It would be better to download only the changed portion. If the vendor dependencies change, then the client should fetch only the vendor dependencies.
+          `}
         >
           <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
             <ListItem style={{ marginBottom: '0.5em' }}>
@@ -958,7 +1113,9 @@ class MyComponent extends React.Component {
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white">
+        <Slide transition={["fade"]} bgColor="white"
+          notes={`Bundle splitting can be achieved using CommonsChunkPlugin.`}
+        >
           <Heading textColor="blue" size={1}>CommonsChunkPlugin</Heading>
           <Image src={images.commonChunks.replace("/", "")} width="80%" />
         </Slide>
@@ -966,6 +1123,12 @@ class MyComponent extends React.Component {
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>The vendor dependencies can be detected by inspecting where the modules are imported.</li>
+              <li>If they come from the node_modules directory, they can be split automatically through a minChunks rule.</li>
+            </ul>
+          `}
         >
           <CodePane
             lang="js"
@@ -1024,6 +1187,12 @@ function isVendor({ resource }) {
         <Slide
           transition={["fade"]}
           bgColor="dark"
+          notes={`
+            <ul>
+              <li>The chunks option of CommonsChunkPlugin allows you to control where the plugin is performing splitting.</li>
+              <li>The option gives more granular control, especially in more complex setups.</li>
+            </ul>
+          `}
         >
           <CodePane
             lang="js"
@@ -1045,13 +1214,39 @@ function isVendor({ resource }) {
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white">
+        <Slide transition={["fade"]} bgColor="white"
+          notes={`You can control the position of shared modules through its async and children flags. async extracts shared modules to an asynchronously loaded bundle while children pushes the shared modules to the parent bundle.`}
+        >
           <Heading textColor="blue" size={1} style={{ marginBottom: 40 }}>CommonsChunkPlugin</Heading>
           <Image src={images.comomnChunksAsync.replace("/", "")} width="80%" />
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.analyze.replace("/", "")} bgDarken={0.7}>
+        <Slide transition={["fade"]} bgImage={images.analyze.replace("/", "")} bgDarken={0.7}
+          notes={`
+            Analyzing build statistics is a good step towards understanding webpack better. Visualizing them helps you to understand the composition of your bundles.
+          `}
+        >
           <Heading size={1} textColor="white">Analyzing Build Statistics</Heading>
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="js"
+            source={`// webpack.prod.js
+  ...,
+  performance: {
+    maxAssetSize: 300000,
+    maxEntrypointSize: 300000,
+    hints: 'warning',
+  },
+  plugins: [ ... ]
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
         </Slide>
 
         <Slide
