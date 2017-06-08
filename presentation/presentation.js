@@ -19,7 +19,6 @@ import {
   BlockQuote,
   Quote,
   Cite,
-  Appear,
 } from "spectacle";
 
 import colors from './theme/colors';
@@ -54,6 +53,7 @@ const images = {
   codeSplittings: require('../assets/code-splitting.png'),
   giantVsRoute: require('../assets/giant-vs-route.png'),
   routesVsComponents: require('../assets/routes-vs-components.png'),
+  happy: require('../assets/happy.gif'),
 };
 
 preloader(images);
@@ -601,7 +601,7 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 </Route>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em' }}
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
           />
         </Slide>
 
@@ -626,8 +626,25 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 </Route>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em' }}
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
           />
+        </Slide>
+
+
+        <Slide transition={["fade"]}
+          bgColor="green"
+        >
+          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              ✅ Route-based splitting
+            </ListItem>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              ❔ Async components splitting
+            </ListItem>
+            <ListItem>
+              Vendor splitting
+            </ListItem>
+          </List>
         </Slide>
 
         <Slide transition={["fade"]}
@@ -723,7 +740,7 @@ const AsyncLogin = (props) => (
 const AsyncLogin = makeItAsync(loader);
 `}
             margin="20px auto"
-            style={{ fontSize: '0.8em' }}
+            style={{ fontSize: '0.8em', backgroundColor: colors.dark, }}
           />
         </Slide>
 
@@ -746,8 +763,193 @@ const App = () =>
   </BrowserRouter>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em' }}
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
           />
+        </Slide>
+
+        <Slide transition={["fade"]} bgColor="green">
+          <Heading textColor="white" size={1} style={{ fontSize: '2em' }}>
+            <Link href="https://github.com/thejameskyle/react-loadable" target="__blank" textColor="white">react-loadable</Link>
+          </Heading>
+          <Heading textColor="white" size={3} style={{ marginBottom: 20 }}>⏳ A higher order component for loading components with promises.</Heading>
+          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
+            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn add react-loadable</Typist>,
+            <div>
+              <div>[1/4] 🔍  Resolving packages...</div>
+              <div>[2/4] 🚚  Fetching packages...</div>
+              <div>[3/4] 🔗  Linking dependencies...</div>
+              <div>[4/4] 📃  Building fresh packages...</div>
+              <div><span style={{ color: colors.green }}>success</span> Saved lockfile.</div>
+              <div><span style={{ color: colors.green }}>success</span> Saved 1 new dependency.</div>
+              <div>└─ react-loadable@3.3.1</div>
+              <div>✨  Done in 7.88s.</div>
+            </div>
+          ]}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="jsx"
+            source={`import Loadable from 'react-loadable';
+
+function MyLoadingComponent() {
+  return <div>Loading...</div>;
+}
+
+const LoadableAnotherComponent = Loadable({
+  loader: () => import('./another-component'),
+  LoadingComponent: MyLoadingComponent
+});
+
+class MyComponent extends React.Component {
+  render() {
+    return <LoadableAnotherComponent/>;
+  }
+}
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+       <Slide transition={["fade"]} bgColor="red">
+          <Heading size={1} textColor="white">
+            What about error-handling?
+          </Heading>
+          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+            🤓
+          </Heading>
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <CodePane
+            lang="jsx"
+            source={`function MyLoadingComponent({ error }) {
+  if (error) {
+    return <div>Error!</div>;
+  } else {
+    return <div>Loading...</div>;
+  }
+}
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.8em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">Avoiding Flash Of Loading Component</Heading>
+          <CodePane
+            lang="jsx"
+            source={`function MyLoadingComponent({ error, pastDelay }) {
+  if (error) {
+    return <div>Error!</div>;
+  } else if (pastDelay) {
+    return <div>Loading...</div>;
+  } else {
+    return null;
+  }
+}
+
+Loadable({
+  loader: () => import('./another-component'),
+  LoadingComponent: MyLoadingComponent,
+  delay: 300, // <- 200 by default
+});
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <CodeSlide
+          transition={["fade"]}
+          lang="js"
+          code={`let LoadableMyComponent = Loadable({
+  loader: () => import('./another-component'),
+  LoadingComponent: MyLoadingComponent,
+});
+
+class MyComponent extends React.Component {
+  state = { showComponent: false };
+
+  onClick = () => {
+    this.setState({ showComponent: true });
+  };
+
+  onMouseOver = () => {
+    LoadableMyComponent.preload();
+  };
+
+  render() {
+    return (
+      <div>
+        <button 
+          onClick={this.onClick} 
+          onMouseOver={this.onMouseOver}
+        >
+          Show loadable component
+        </button>
+        {this.state.showComponent && 
+          <LoadableMyComponent/>}
+      </div>
+    )
+  }
+}`}
+          ranges={[
+            { loc: [0, 4], title: 'Preloading' },
+            { loc: [16, 30] },
+            { loc: [8, 11] },
+            { loc: [12, 15] },
+          ]}
+        />
+
+        <Slide
+          transition={["fade"]}
+          bgColor="dark"
+        >
+          <Heading size={1} textColor="white">We can go deeper...</Heading>
+          <CodePane
+            lang="jsx"
+            source={`import Perimeter from 'react-perimeter';
+
+<Perimeter
+  onBreach={LoadableMyComponent.preload}
+  padding={60}>
+  <button onClick={this.onClick}>Show loadable component</button>
+</Perimeter>
+`}
+            margin="20px auto"
+            style={{ fontSize: '0.7em', backgroundColor: colors.dark, }}
+          />
+        </Slide>
+
+        <Slide transition={["fade"]} bgImage={images.happy.replace("/", "")} />
+
+        <Slide transition={["fade"]}
+          bgColor="green"
+        >
+          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              ✅ Route-based splitting
+            </ListItem>
+            <ListItem style={{ marginBottom: '0.5em' }}>
+              ✅ Async components splitting
+            </ListItem>
+            <ListItem>
+              ❔ Vendor splitting
+            </ListItem>
+          </List>
         </Slide>
 
         <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
