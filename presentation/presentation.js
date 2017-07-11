@@ -1,7 +1,7 @@
 // Import React
 
 import preloader from "spectacle/lib/utils/preloader";
-import CodeSlide from 'spectacle-code-slide';
+import CodeSlide from "spectacle-code-slide";
 import Terminal from "spectacle-terminal";
 import Typist from "react-typist";
 import React from "react";
@@ -18,13 +18,13 @@ import {
   Image,
   BlockQuote,
   Quote,
-  Cite,
+  Cite
 } from "spectacle";
 
-import colors from './theme/colors';
+import colors from "./theme/colors";
 import createTheme from "./theme";
-import fonts from './theme/fonts';
-import Suevalov from './components/Suevalov';
+import fonts from "./theme/fonts";
+import Suevalov from "./components/Suevalov";
 
 // Import Spectacle Core tags
 
@@ -32,34 +32,33 @@ import Suevalov from './components/Suevalov';
 
 // Import theme
 
-
 // Require CSS
 require("normalize.css");
 require("./theme/index.css");
 
 const images = {
-  me: require('../assets/me.png'),
-  ironmanThanks: require('../assets/ironman-thanks.gif'),
-  compose: require('../assets/compose.gif'),
-  mainCover: require('../assets/main-cover.jpg'),
-  dataart: require('../assets/dataart.png'),
-  development: require('../assets/development.jpg'),
-  lowConnection: require('../assets/low-connectivity.jpg'),
-  lowConnection2: require('../assets/low-connectivity-2.jpg'),
-  websiteOpeningProcess: require('../assets/website_opening_process.png'),
-  noWords: require('../assets/no-words.gif'),
-  interactive: require('../assets/interactive.png'),
-  split: require('../assets/split.gif'),
-  codeSplittings: require('../assets/code-splitting.png'),
-  giantVsRoute: require('../assets/giant-vs-route.png'),
-  routesVsComponents: require('../assets/routes-vs-components.png'),
-  happy: require('../assets/happy.gif'),
-  commonChunks: require('../assets/common-chunks.png'),
-  comomnChunksAsync: require('../assets/commonschunk-async-children.png'),
-  analyze: require('../assets/analyze.jpg'),
-  sourceMap: require('../assets/source-map-analizer.png'),
-  realPhone: require('../assets/real-phone.jpg'),
-  waterfalls: require('../assets/waterfalls.jpg')
+  me: require("../assets/me.png"),
+  ironmanThanks: require("../assets/ironman-thanks.gif"),
+  compose: require("../assets/compose.gif"),
+  mainCover: require("../assets/main-cover.jpg"),
+  dataart: require("../assets/dataart.png"),
+  development: require("../assets/development.jpg"),
+  lowConnection: require("../assets/low-connectivity.jpg"),
+  lowConnection2: require("../assets/low-connectivity-2.jpg"),
+  websiteOpeningProcess: require("../assets/website_opening_process.png"),
+  noWords: require("../assets/no-words.gif"),
+  interactive: require("../assets/interactive.png"),
+  split: require("../assets/split.gif"),
+  codeSplittings: require("../assets/code-splitting.png"),
+  giantVsRoute: require("../assets/giant-vs-route.png"),
+  routesVsComponents: require("../assets/routes-vs-components.png"),
+  happy: require("../assets/happy.gif"),
+  commonChunks: require("../assets/common-chunks.png"),
+  comomnChunksAsync: require("../assets/commonschunk-async-children.png"),
+  analyze: require("../assets/analyze.jpg"),
+  sourceMap: require("../assets/source-map-analizer.png"),
+  realPhone: require("../assets/real-phone.jpg"),
+  waterfalls: require("../assets/waterfalls.jpg")
 };
 
 preloader(images);
@@ -80,7 +79,7 @@ const theme = createTheme(
     lightBlue: colors.lightBlue,
     red: colors.red,
     violet: colors.violet,
-    yellow: colors.yellow,
+    yellow: colors.yellow
   },
   {
     primary: fonts.Lato,
@@ -92,41 +91,67 @@ const theme = createTheme(
 class Presentation extends React.Component {
   render() {
     return (
-      <Deck transition={[]} theme={theme} transitionDuration={300} progress="bar">
-
-        <Slide transition={["fade"]} notes={`
+      <Deck
+        transition={[]}
+        theme={theme}
+        transitionDuration={300}
+        progress="bar"
+      >
+        <Slide
+          transition={["fade"]}
+          notes={`
             <ul>
               <li>Introduce yourself</li>
               <li>About splitting bundles and saving traffic</li>
               <li>Disclaimer: this presentation is not code-splitted</li>
-            </ul>        
-`} bgImage={images.mainCover.replace("/", "")} bgDarken={0.7}>
+            </ul>
+`}
+          bgImage={images.mainCover.replace("/", "")}
+          bgDarken={0.7}
+        >
           <Heading size={1} textSize="2em" textColor="white">
             Code-Splitting in React apps
           </Heading>
-          <Heading size={6} style={{ marginTop: 50, marginBottom: 30 }} textColor="white">
-            React Poznan
+          <Heading
+            size={6}
+            style={{ marginTop: 50, marginBottom: 30 }}
+            textColor="white"
+          >
+            IT talk, DataArt, Wroclaw
           </Heading>
           <div style={{ marginBottom: 20 }}>
             <Suevalov photo={images.me.replace("/", "")} />
           </div>
-          <Link textColor="white" href="http://suevalov.com/presentations/code-splitting" target="__blank">
+          <Link
+            textColor="white"
+            href="http://suevalov.com/presentations/code-splitting"
+            target="__blank"
+          >
             http://suevalov.com/presentations/code-splitting
           </Link>
         </Slide>
 
-        <Slide bgColor="white" notes={`
+        <Slide
+          bgColor="white"
+          notes={`
           <ul>
             <li>Technology Consultancy & Solution Desing</li>
             <li>Wroclaw & Lublin</li>
           </ul>
-        `}>
-          <Link alt="DataArt" href="http://dataart.com/" style={{ display: 'block' }} target="__blank">
+        `}
+        >
+          <Link
+            alt="DataArt"
+            href="http://dataart.com/"
+            style={{ display: "block" }}
+            target="__blank"
+          >
             <Image width="70%" src={images.dataart.replace("/", "")} />
           </Link>
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="blue"
           notes={`
             Hands up who knows about code splitting?
@@ -136,7 +161,11 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">
             What's code splitting?
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             🤔
           </Heading>
         </Slide>
@@ -157,16 +186,24 @@ class Presentation extends React.Component {
           `}
         >
           <BlockQuote>
-            <Quote>It allows you to split your code into various bundles which you can then load on demand.</Quote>
+            <Quote>
+              It allows you to split your code into various bundles which you
+              can then load on demand.
+            </Quote>
             <Cite>
-              <Link href="https://webpack.js.org/" target="__blank" textColor="lightBlue">
+              <Link
+                href="https://webpack.js.org/"
+                target="__blank"
+                textColor="lightBlue"
+              >
                 webpack.js.org
               </Link>
             </Cite>
           </BlockQuote>
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="blue"
           notes={`
             <ul>
@@ -177,13 +214,18 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">
             Why split the code?
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             🙄
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} 
-          bgImage={images.development.replace("/", "")} 
+        <Slide
+          transition={["fade"]}
+          bgImage={images.development.replace("/", "")}
           bgDarken={0.7}
           notes={`
             <ul>
@@ -196,13 +238,18 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">
             http://localhost:3000/
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             😎
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} 
-          bgImage={images.lowConnection.replace("/", "")} 
+        <Slide
+          transition={["fade"]}
+          bgImage={images.lowConnection.replace("/", "")}
           bgDarken={0.6}
           notes={`
             <ul>
@@ -213,12 +260,19 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">
             It can be slow...
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             😤
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.lowConnection2.replace("/", "")} bgDarken={0.6}
+        <Slide
+          transition={["fade"]}
+          bgImage={images.lowConnection2.replace("/", "")}
+          bgDarken={0.6}
           notes={`
             <ul>
               <li>Mobile web speeds matter.</li>
@@ -233,12 +287,17 @@ class Presentation extends React.Component {
           <Heading size={1} textColor="white">
             ... and expensive
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             😨
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]} 
+        <Slide
+          transition={["fade"]}
           bgColor="white"
           notes={`
             <ul>
@@ -250,46 +309,86 @@ class Presentation extends React.Component {
             </ul>
           `}
         >
-          <Image src={images.websiteOpeningProcess.replace("/", "")} width="100%" />
+          <Image
+            src={images.websiteOpeningProcess.replace("/", "")}
+            width="100%"
+          />
         </Slide>
 
-        <Slide transition={[]} bgColor="blue"
+        <Slide
+          transition={[]}
+          bgColor="blue"
           notes={`
             <ul>
               <li>It's not that easy to achieve</li>
             </ul>
           `}
         >
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <div>create-react-app just-few-dependencies</div>,
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
-            <div>
-              <div>                                                      </div>
-              <div>Creating an optimized production build...</div>
-              <div style={{ color: colors.green }}>Compiled successfully.</div>
-              <div>                                                      </div>
-              <div>File sizes after gzip:</div>
-              <div>47.09 KB (151 KB)  build/static/js/<span style={{ color: colors.green }}>main.8b0e51a6.js</span></div>
-              <div>289 B     build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
-            </div>,
-          ]}
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <div>create-react-app just-few-dependencies</div>,
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn build
+              </Typist>,
+              <div>
+                <div> </div>
+                <div>Creating an optimized production build...</div>
+                <div style={{ color: colors.green }}>
+                  Compiled successfully.
+                </div>
+                <div> </div>
+                <div>File sizes after gzip:</div>
+                <div>
+                  47.09 KB (151 KB) build/static/js/<span
+                    style={{ color: colors.green }}
+                  >
+                    main.8b0e51a6.js
+                  </span>
+                </div>
+                <div>
+                  289 B build/static/css/<span style={{ color: colors.green }}>
+                    main.9a0fe4f1.css
+                  </span>
+                </div>
+              </div>
+            ]}
           />
         </Slide>
 
         <Slide transition={[]} bgColor="blue">
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <div>yarn add draft-js moment emojione</div>,
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
-            <div>
-              <div>                                                      </div>
-              <div>Creating an optimized production build...</div>
-              <div style={{ color: colors.green }}>Compiled successfully.</div>
-              <div>                                                      </div>
-              <div>File sizes after gzip:</div>
-              <div><span style={{ color: colors.red }}>188.63 KB (851 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.0b364eff.js</span></div>
-              <div>289 B     build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
-            </div>,
-          ]}
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <div>yarn add draft-js moment emojione</div>,
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn build
+              </Typist>,
+              <div>
+                <div> </div>
+                <div>Creating an optimized production build...</div>
+                <div style={{ color: colors.green }}>
+                  Compiled successfully.
+                </div>
+                <div> </div>
+                <div>File sizes after gzip:</div>
+                <div>
+                  <span style={{ color: colors.red }}>
+                    188.63 KB (851 KB)
+                  </span>{" "}
+                  build/static/js/<span style={{ color: colors.green }}>
+                    main.0b364eff.js
+                  </span>
+                </div>
+                <div>
+                  289 B build/static/css/<span style={{ color: colors.green }}>
+                    main.9a0fe4f1.css
+                  </span>
+                </div>
+              </div>
+            ]}
           />
         </Slide>
 
@@ -298,20 +397,30 @@ class Presentation extends React.Component {
         </Slide>
 
         <Slide transition={["fade"]} bgImage={images.noWords.replace("/", "")}>
-          <Heading size={1} textColor="white">...</Heading>
+          <Heading size={1} textColor="white">
+            ...
+          </Heading>
         </Slide>
 
-
-        <Slide transition={["fade"]} bgImage={images.split.replace("/", "")} bgDarken={0.6}>
+        <Slide
+          transition={["fade"]}
+          bgImage={images.split.replace("/", "")}
+          bgDarken={0.6}
+        >
           <Heading size={1} textColor="white">
             It's time to split it
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             💪
           </Heading>
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="green"
           notes={`
             <ul>
@@ -319,18 +428,22 @@ class Presentation extends React.Component {
             </ul>
           `}
         >
-          <Heading size={1} textColor="white">Code Splitting Formats</Heading>
-          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+          <Heading size={1} textColor="white">
+            Code Splitting Formats
+          </Heading>
+          <List
+            textColor="white"
+            style={{ listStyle: "none", textAlign: "center" }}
+          >
+            <ListItem style={{ marginBottom: "0.5em" }}>
               require.ensure
             </ListItem>
-            <ListItem>
-              dynamic import
-            </ListItem>
+            <ListItem>dynamic import</ListItem>
           </List>
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="dark"
           notes={`
             <ul>
@@ -340,45 +453,45 @@ class Presentation extends React.Component {
             </ul>
           `}
         >
-          <Heading size={1} textColor="white">require.ensure</Heading>
+          <Heading size={1} textColor="white">
+            require.ensure
+          </Heading>
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.6em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.6em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
             source={`
 /*
   1. Specific to Webpack.
-  2. Works in both Webpack 1 & 2  
+  2. Works in both Webpack 1 & 2
   3. Will be deprecated and replaced by import
   4. Relies on Promise. Don't forget to shim.
 */
 
 require.ensure(
-  dependencies: Array<string>, 
-  callback: (require) => void, 
-  errorCallback?: (error) => void, 
+  dependencies: Array<string>,
+  callback: (require) => void,
+  errorCallback?: (error) => void,
   chunkName?: string
 )
             `}
           />
         </Slide>
 
-        <Slide transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
@@ -396,33 +509,53 @@ determineDate();
         </Slide>
 
         <Slide transition={[]} bgColor="blue">
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
-            <div>
-              <div>                                                      </div>
-              <div>Creating an optimized production build...</div>
-              <div style={{ color: colors.green }}>Compiled successfully.</div>
-              <div>                                                      </div>
-              <div>File sizes after gzip:</div>
-              <div>172.75 KB <span style={{ color: colors.green }}>(-15.88 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.b9eed592.js</span></div>
-              <div>16.64 KB               build/static/js/<span style={{ color: colors.green }}>0.40f5f41a.chunk.js</span></div>
-              <div>289 B                  build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
-            </div>,
-          ]}
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn build
+              </Typist>,
+              <div>
+                <div> </div>
+                <div>Creating an optimized production build...</div>
+                <div style={{ color: colors.green }}>
+                  Compiled successfully.
+                </div>
+                <div> </div>
+                <div>File sizes after gzip:</div>
+                <div>
+                  172.75 KB{" "}
+                  <span style={{ color: colors.green }}>(-15.88 KB)</span>{" "}
+                  build/static/js/<span style={{ color: colors.green }}>
+                    main.b9eed592.js
+                  </span>
+                </div>
+                <div>
+                  16.64 KB build/static/js/<span
+                    style={{ color: colors.green }}
+                  >
+                    0.40f5f41a.chunk.js
+                  </span>
+                </div>
+                <div>
+                  289 B build/static/css/<span style={{ color: colors.green }}>
+                    main.9a0fe4f1.css
+                  </span>
+                </div>
+              </div>
+            ]}
           />
         </Slide>
 
-
-        <Slide transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
@@ -439,36 +572,57 @@ determineDate();
           />
         </Slide>
 
-
         <Slide transition={[]} bgColor="blue">
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn build</Typist>,
-            <div>
-              <div>                                                      </div>
-              <div>Creating an optimized production build...</div>
-              <div style={{ color: colors.green }}>Compiled successfully.</div>
-              <div>                                                      </div>
-              <div>File sizes after gzip:</div>
-              <div>172.75 KB <span style={{ color: colors.green }}>(-15.88 KB)</span>  build/static/js/<span style={{ color: colors.green }}>main.b9eed592.js</span></div>
-              <div>16.64 KB               build/static/js/<span style={{ color: colors.green }}>my-first-bundle.2eebcbb4.chunk.js</span></div>
-              <div>289 B                  build/static/css/<span style={{ color: colors.green }}>main.9a0fe4f1.css</span></div>
-            </div>,
-          ]}
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn build
+              </Typist>,
+              <div>
+                <div> </div>
+                <div>Creating an optimized production build...</div>
+                <div style={{ color: colors.green }}>
+                  Compiled successfully.
+                </div>
+                <div> </div>
+                <div>File sizes after gzip:</div>
+                <div>
+                  172.75 KB{" "}
+                  <span style={{ color: colors.green }}>(-15.88 KB)</span>{" "}
+                  build/static/js/<span style={{ color: colors.green }}>
+                    main.b9eed592.js
+                  </span>
+                </div>
+                <div>
+                  16.64 KB build/static/js/<span
+                    style={{ color: colors.green }}
+                  >
+                    my-first-bundle.2eebcbb4.chunk.js
+                  </span>
+                </div>
+                <div>
+                  289 B build/static/css/<span style={{ color: colors.green }}>
+                    main.9a0fe4f1.css
+                  </span>
+                </div>
+              </div>
+            ]}
           />
         </Slide>
 
-
-        <Slide transition={["fade"]}
-          bgColor="dark"
-        >
-          <Heading size={1} textColor="white">Dependencies as Parameter</Heading>
+        <Slide transition={["fade"]} bgColor="dark">
+          <Heading size={1} textColor="white">
+            Dependencies as Parameter
+          </Heading>
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.5em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.5em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
@@ -489,7 +643,8 @@ require.ensure(
           />
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="dark"
           notes={`
             <ul>
@@ -499,17 +654,21 @@ require.ensure(
           `}
         >
           <Heading size={1} textColor="white">
-            <Link href="https://github.com/tc39/proposal-dynamic-import" target="__blank" textColor="white">
+            <Link
+              href="https://github.com/tc39/proposal-dynamic-import"
+              target="__blank"
+              textColor="white"
+            >
               import()
             </Link>
           </Heading>
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.6em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.6em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
@@ -530,16 +689,14 @@ import(path: string)
           />
         </Slide>
 
-        <Slide transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             style={{
               backgroundColor: colors.dark,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0.5em auto"
             lang="javascript"
@@ -556,7 +713,6 @@ determineDate();
           />
         </Slide>
 
-
         <Slide transition={["fade"]} bgColor="blue">
           <Heading size={1} textColor="white">
             Setting Up Dynamic Imports
@@ -564,10 +720,10 @@ determineDate();
           <CodePane
             style={{
               backgroundColor: colors.blue,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0 auto"
             lang="bash"
@@ -577,10 +733,10 @@ yarn add babel-eslint --dev`}
           <CodePane
             style={{
               backgroundColor: colors.blue,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0 auto"
             lang="javascript"
@@ -605,10 +761,10 @@ module.exports = {
           <CodePane
             style={{
               backgroundColor: colors.blue,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0 auto"
             lang="bash"
@@ -618,10 +774,10 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           <CodePane
             style={{
               backgroundColor: colors.blue,
-              fontSize: '0.7em',
-              maxWidth: 'initial',
-              minWidth: 'initial',
-              width: '80%'
+              fontSize: "0.7em",
+              maxWidth: "initial",
+              minWidth: "initial",
+              width: "80%"
             }}
             margin="0 auto"
             lang="javascript"
@@ -633,23 +789,24 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           />
         </Slide>
 
-        <Slide transition={["fade"]}
-          bgColor="green"
-        >
-          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+        <Slide transition={["fade"]} bgColor="green">
+          <List
+            textColor="white"
+            style={{ listStyle: "none", textAlign: "center" }}
+          >
+            <ListItem style={{ marginBottom: "0.5em" }}>
               Route-based splitting
             </ListItem>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+            <ListItem style={{ marginBottom: "0.5em" }}>
               Async components splitting
             </ListItem>
-            <ListItem>
-              Vendor splitting
-            </ListItem>
+            <ListItem>Vendor splitting</ListItem>
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white"
+        <Slide
+          transition={["fade"]}
+          bgColor="white"
           notes={`
             <ul>
               <li>imagine the application</li>
@@ -661,26 +818,30 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           <Image src={images.codeSplittings.replace("/", "")} width="100%" />
         </Slide>
 
-        <Slide transition={["fade"]}
-          bgColor="white"
-        >
-          <Heading size={1} textColor="blue">Route-based splitting</Heading>
+        <Slide transition={["fade"]} bgColor="white">
+          <Heading size={1} textColor="blue">
+            Route-based splitting
+          </Heading>
           <Layout>
             <Fill>
-              <Image style={{ marginTop: 30 }} width="90%" src={images.giantVsRoute.replace("/", "")} />
+              <Image
+                style={{ marginTop: 30 }}
+                width="90%"
+                src={images.giantVsRoute.replace("/", "")}
+              />
             </Fill>
             <Fill>
-              <List textColor="blue" style={{ listStyle: 'none' }}>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+              <List textColor="blue" style={{ listStyle: "none" }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   The best place to start
                 </ListItem>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   Potentially max size reduction
                 </ListItem>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   Router needs to be async aware
                 </ListItem>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   Beware of code duplication in output
                 </ListItem>
               </List>
@@ -688,11 +849,10 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
           </Layout>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
-          <Heading size={1} textColor="white">React Router v3 with import()</Heading>
+        <Slide transition={["fade"]} bgColor="dark">
+          <Heading size={1} textColor="white">
+            React Router v3 with import()
+          </Heading>
           <CodePane
             lang="jsx"
             source={`<Route path="/" component={App}>
@@ -709,23 +869,22 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 </Route>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
-          <Heading size={1} textColor="white">React Router v3 with require.ensure</Heading>
+        <Slide transition={["fade"]} bgColor="dark">
+          <Heading size={1} textColor="white">
+            React Router v3 with require.ensure
+          </Heading>
           <CodePane
             lang="jsx"
             source={`<Route path="/" component={App}>
     <Route
       path="/login"
       getComponent={(_, cb) => {
-          require.ensure([], 
-            (require) => { cb(null, require('./Login'))}, 
+          require.ensure([],
+            (require) => { cb(null, require('./Login'))},
             (e) => { cb(e, null); },
             'login-bundle')
       }}
@@ -734,12 +893,12 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
 </Route>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="green"
           notes={`
             <ul>
@@ -749,20 +908,22 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
             </ul>
           `}
         >
-          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+          <List
+            textColor="white"
+            style={{ listStyle: "none", textAlign: "center" }}
+          >
+            <ListItem style={{ marginBottom: "0.5em" }}>
               ✅ Route-based splitting
             </ListItem>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+            <ListItem style={{ marginBottom: "0.5em" }}>
               ❔ Async components splitting
             </ListItem>
-            <ListItem>
-              Vendor splitting
-            </ListItem>
+            <ListItem>Vendor splitting</ListItem>
           </List>
         </Slide>
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="white"
           notes={`
             <ul>
@@ -773,26 +934,33 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
             </ul>
           `}
         >
-          <Heading size={1} textColor="blue">Async components splitting</Heading>
+          <Heading size={1} textColor="blue">
+            Async components splitting
+          </Heading>
           <Layout>
             <Fill>
-              <Image style={{ marginTop: 30 }} width="90%" src={images.routesVsComponents.replace("/", "")} />
+              <Image
+                style={{ marginTop: 30 }}
+                width="90%"
+                src={images.routesVsComponents.replace("/", "")}
+              />
             </Fill>
             <Fill>
-              <List textColor="blue" style={{ listStyle: 'none' }}>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
-                  Best cases are modals, tabs, popups or components that are not visible in viewport
+              <List textColor="blue" style={{ listStyle: "none" }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
+                  Best cases are modals, tabs, popups or components that are not
+                  visible in viewport
                 </ListItem>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   Convenient to use as HOC
                 </ListItem>
-                <ListItem style={{ marginBottom: '0.5em', fontSize: '0.9em' }}>
+                <ListItem style={{ marginBottom: "0.5em", fontSize: "0.9em" }}>
                   Enables conditional patterns
                 </ListItem>
               </List>
             </Fill>
           </Layout>
-        </Slide>        
+        </Slide>
 
         <CodeSlide
           notes={`
@@ -815,7 +983,7 @@ yarn add babel-plugin-syntax-dynamic-import --dev`}
   componentDidMount() {
     this.props.loader()
       .then(module => {
-        return mod.default ? 
+        return mod.default ?
           mod.default : mod
       })
       .then((Component) => {
@@ -847,14 +1015,11 @@ const makeItAsync = (loader) => (props) => (
             { loc: [12, 22] },
             { loc: [26, 29] },
             { loc: [30, 33] },
-            { loc: [36, 39] }            
+            { loc: [36, 39] }
           ]}
         />
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             lang="jsx"
             source={`const loader = () => import('./Login');
@@ -866,7 +1031,7 @@ const AsyncLogin = (props) => (
 const AsyncLogin = makeItAsync(loader);
 `}
             margin="20px auto"
-            style={{ fontSize: '0.8em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.8em", backgroundColor: colors.dark }}
           />
         </Slide>
 
@@ -881,7 +1046,9 @@ const AsyncLogin = makeItAsync(loader);
             </ul>
           `}
         >
-          <Heading size={1} textColor="white">React Router v4</Heading>
+          <Heading size={1} textColor="white">
+            React Router v4
+          </Heading>
           <CodePane
             lang="jsx"
             source={`const Foo = makeItAsync(() => import('./Foo'));
@@ -896,32 +1063,53 @@ const App = () =>
   </BrowserRouter>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="green"
+        <Slide
+          transition={["fade"]}
+          bgColor="green"
           notes={`
             Instead you can use Loadable to abstract away the problem. Using Loadable is simple.
           `}
         >
-          <Heading textColor="white" size={1} style={{ fontSize: '2em' }}>
-            <Link href="https://github.com/thejameskyle/react-loadable" target="__blank" textColor="white">react-loadable</Link>
+          <Heading textColor="white" size={1} style={{ fontSize: "2em" }}>
+            <Link
+              href="https://github.com/thejameskyle/react-loadable"
+              target="__blank"
+              textColor="white"
+            >
+              react-loadable
+            </Link>
           </Heading>
-          <Heading textColor="white" size={3} style={{ marginBottom: 20 }}>⏳ A higher order component for loading components with promises.</Heading>
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn add react-loadable</Typist>,
-            <div>
-              <div>[1/4] 🔍  Resolving packages...</div>
-              <div>[2/4] 🚚  Fetching packages...</div>
-              <div>[3/4] 🔗  Linking dependencies...</div>
-              <div>[4/4] 📃  Building fresh packages...</div>
-              <div><span style={{ color: colors.green }}>success</span> Saved lockfile.</div>
-              <div><span style={{ color: colors.green }}>success</span> Saved 1 new dependency.</div>
-              <div>└─ react-loadable@3.3.1</div>
-              <div>✨  Done in 7.88s.</div>
-            </div>
-          ]}
+          <Heading textColor="white" size={3} style={{ marginBottom: 20 }}>
+            ⏳ A higher order component for loading components with promises.
+          </Heading>
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn add react-loadable
+              </Typist>,
+              <div>
+                <div>[1/4] 🔍 Resolving packages...</div>
+                <div>[2/4] 🚚 Fetching packages...</div>
+                <div>[3/4] 🔗 Linking dependencies...</div>
+                <div>[4/4] 📃 Building fresh packages...</div>
+                <div>
+                  <span style={{ color: colors.green }}>success</span> Saved
+                  lockfile.
+                </div>
+                <div>
+                  <span style={{ color: colors.green }}>success</span> Saved 1
+                  new dependency.
+                </div>
+                <div>└─ react-loadable@3.3.1</div>
+                <div>✨ Done in 7.88s.</div>
+              </div>
+            ]}
           />
         </Slide>
 
@@ -952,23 +1140,24 @@ class MyComponent extends React.Component {
 }
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-       <Slide transition={["fade"]} bgColor="red">
+        <Slide transition={["fade"]} bgColor="red">
           <Heading size={1} textColor="white">
             What about error-handling?
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             🤓
           </Heading>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             lang="jsx"
             source={`function MyLoadingComponent({ error }) {
@@ -980,7 +1169,7 @@ class MyComponent extends React.Component {
 }
 `}
             margin="20px auto"
-            style={{ fontSize: '0.8em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.8em", backgroundColor: colors.dark }}
           />
         </Slide>
 
@@ -995,7 +1184,9 @@ class MyComponent extends React.Component {
           </ul>
           `}
         >
-          <Heading size={1} textColor="white">Avoiding Flash Of Loading Component</Heading>
+          <Heading size={1} textColor="white">
+            Avoiding Flash Of Loading Component
+          </Heading>
           <CodePane
             lang="jsx"
             source={`function MyLoadingComponent({ error, pastDelay }) {
@@ -1015,7 +1206,7 @@ Loadable({
 });
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
@@ -1046,23 +1237,23 @@ class MyComponent extends React.Component {
   render() {
     return (
       <div>
-        <button 
-          onClick={this.onClick} 
+        <button
+          onClick={this.onClick}
           onMouseOver={this.onMouseOver}
         >
           Show loadable component
         </button>
-        {this.state.showComponent && 
+        {this.state.showComponent &&
           <LoadableMyComponent/>}
       </div>
     )
   }
 }`}
           ranges={[
-            { loc: [0, 4], title: 'Preloading' },
+            { loc: [0, 4], title: "Preloading" },
             { loc: [16, 30] },
             { loc: [8, 11] },
-            { loc: [12, 15] },
+            { loc: [12, 15] }
           ]}
         />
 
@@ -1076,7 +1267,9 @@ class MyComponent extends React.Component {
             </ul>
           `}
         >
-          <Heading size={1} textColor="white">We can go deeper...</Heading>
+          <Heading size={1} textColor="white">
+            We can go deeper...
+          </Heading>
           <CodePane
             lang="jsx"
             source={`import Perimeter from 'react-perimeter';
@@ -1088,35 +1281,41 @@ class MyComponent extends React.Component {
 </Perimeter>
 `}
             margin="20px auto"
-            style={{ fontSize: '0.7em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.7em", backgroundColor: colors.dark }}
           />
         </Slide>
 
         <Slide transition={["fade"]} bgImage={images.happy.replace("/", "")} />
 
-        <Slide transition={["fade"]}
+        <Slide
+          transition={["fade"]}
           bgColor="green"
           notes={`
             It would be better to download only the changed portion. If the vendor dependencies change, then the client should fetch only the vendor dependencies.
           `}
         >
-          <List textColor="white" style={{ listStyle: 'none', textAlign: 'center' }}>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+          <List
+            textColor="white"
+            style={{ listStyle: "none", textAlign: "center" }}
+          >
+            <ListItem style={{ marginBottom: "0.5em" }}>
               ✅ Route-based splitting
             </ListItem>
-            <ListItem style={{ marginBottom: '0.5em' }}>
+            <ListItem style={{ marginBottom: "0.5em" }}>
               ✅ Async components splitting
             </ListItem>
-            <ListItem>
-              ❔ Vendor splitting
-            </ListItem>
+            <ListItem>❔ Vendor splitting</ListItem>
           </List>
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white"
+        <Slide
+          transition={["fade"]}
+          bgColor="white"
           notes={`Bundle splitting can be achieved using CommonsChunkPlugin.`}
         >
-          <Heading textColor="blue" size={1}>CommonsChunkPlugin</Heading>
+          <Heading textColor="blue" size={1}>
+            CommonsChunkPlugin
+          </Heading>
           <Image src={images.commonChunks.replace("/", "")} width="80%" />
         </Slide>
 
@@ -1151,14 +1350,11 @@ function isVendor({ resource }) {
 }
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             lang="js"
             source={`{
@@ -1180,7 +1376,7 @@ function isVendor({ resource }) {
 }
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
@@ -1201,27 +1397,34 @@ function isVendor({ resource }) {
     minChunks(module, count) {
         var context = module.context;
         var targets = [
-          'react-dnd', 'react-dnd-html5-backend', 
+          'react-dnd', 'react-dnd-html5-backend',
           'react-dnd-touch-backend', 'dnd-core'
         ];
-        return context && context.indexOf('node_modules') >= 0 && 
+        return context && context.indexOf('node_modules') >= 0 &&
                 targets.find(t => new RegExp('\\\\' + t + '\\\\', 'i').test(context));
     },
 }),
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-        <Slide transition={["fade"]} bgColor="white"
+        <Slide
+          transition={["fade"]}
+          bgColor="white"
           notes={`You can control the position of shared modules through its async and children flags. async extracts shared modules to an asynchronously loaded bundle while children pushes the shared modules to the parent bundle.`}
         >
-          <Heading textColor="blue" size={1} style={{ marginBottom: 40 }}>CommonsChunkPlugin</Heading>
+          <Heading textColor="blue" size={1} style={{ marginBottom: 40 }}>
+            CommonsChunkPlugin
+          </Heading>
           <Image src={images.comomnChunksAsync.replace("/", "")} width="80%" />
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.analyze.replace("/", "")} bgDarken={0.7}
+        <Slide
+          transition={["fade"]}
+          bgImage={images.analyze.replace("/", "")}
+          bgDarken={0.7}
           notes={`
             <ul>
               <li>Analyzing build statistics is a good step towards understanding webpack better.</li>
@@ -1229,13 +1432,12 @@ function isVendor({ resource }) {
             </ul>
           `}
         >
-          <Heading size={1} textColor="white">Analyzing Build Statistics</Heading>
+          <Heading size={1} textColor="white">
+            Analyzing Build Statistics
+          </Heading>
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             lang="js"
             source={`// webpack.prod.js
@@ -1248,14 +1450,11 @@ function isVendor({ resource }) {
   plugins: [ ... ]
 `}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
-        <Slide
-          transition={["fade"]}
-          bgColor="dark"
-        >
+        <Slide transition={["fade"]} bgColor="dark">
           <CodePane
             lang="js"
             source={`// package.json
@@ -1268,39 +1467,65 @@ function isVendor({ resource }) {
   ...
 }`}
             margin="20px auto"
-            style={{ fontSize: '0.6em', backgroundColor: colors.dark, }}
+            style={{ fontSize: "0.6em", backgroundColor: colors.dark }}
           />
         </Slide>
 
         <Slide transition={["fade"]} bgColor="green">
           <Heading size={1} textColor="white">
-            <Link href="https://survivejs.com/webpack/optimizing/analyzing-build-statistics/" target="__blank" textColor="white">
+            <Link
+              href="https://survivejs.com/webpack/optimizing/analyzing-build-statistics/"
+              target="__blank"
+              textColor="white"
+            >
               Different tools to visualize
             </Link>
           </Heading>
-           <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             🛠
           </Heading>
         </Slide>
 
-         <Slide transition={["fade"]} bgColor="green">
-          <Heading textColor="white" size={1} style={{ fontSize: '2em' }}>
-            <Link href="https://github.com/thejameskyle/react-loadable" target="__blank" textColor="white">source-map-explorer</Link>
+        <Slide transition={["fade"]} bgColor="green">
+          <Heading textColor="white" size={1} style={{ fontSize: "2em" }}>
+            <Link
+              href="https://github.com/thejameskyle/react-loadable"
+              target="__blank"
+              textColor="white"
+            >
+              source-map-explorer
+            </Link>
           </Heading>
-          <Heading textColor="white" size={5} style={{ marginBottom: 20 }}>🔎 Analyze and debug space usage through source maps.</Heading>
-          <Terminal showFirstEntry title="1. suevalov@suevalov: ~(zsh)" output={[
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>yarn global add source-map-explorer</Typist>,
-            <div>
-              <div>[1/4] 🔍  Resolving packages...</div>
-              <div>[2/4] 🚚  Fetching packages...</div>
-              <div>[3/4] 🔗  Linking dependencies...</div>
-              <div>[4/4] 📃  Building fresh packages...</div>
-              <div><span style={{ color: colors.green }}>success</span> Installed "source-map-explorer@1.3.3" with binaries:</div>
-              <div>- source-map-explorer</div>
-              <div>✨  Done in 7.88s.</div>
-            </div>,
-            <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>source-map-explorer build/static/js/main.885e7e1b.js</Typist>,
-          ]}
+          <Heading textColor="white" size={5} style={{ marginBottom: 20 }}>
+            🔎 Analyze and debug space usage through source maps.
+          </Heading>
+          <Terminal
+            showFirstEntry
+            title="1. suevalov@suevalov: ~(zsh)"
+            output={[
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                yarn global add source-map-explorer
+              </Typist>,
+              <div>
+                <div>[1/4] 🔍 Resolving packages...</div>
+                <div>[2/4] 🚚 Fetching packages...</div>
+                <div>[3/4] 🔗 Linking dependencies...</div>
+                <div>[4/4] 📃 Building fresh packages...</div>
+                <div>
+                  <span style={{ color: colors.green }}>success</span> Installed
+                  "source-map-explorer@1.3.3" with binaries:
+                </div>
+                <div>- source-map-explorer</div>
+                <div>✨ Done in 7.88s.</div>
+              </div>,
+              <Typist cursor={{ hideWhenDone: true, hideWhenDoneDelay: 100 }}>
+                source-map-explorer build/static/js/main.885e7e1b.js
+              </Typist>
+            ]}
           />
         </Slide>
 
@@ -1308,72 +1533,157 @@ function isVendor({ resource }) {
           <Image src={images.sourceMap.replace("/", "")} width="100%" />
         </Slide>
 
-        <Slide transition={["fade"]} bgImage={images.realPhone.replace("/", "")} bgDarken={0.7}>
+        <Slide
+          transition={["fade"]}
+          bgImage={images.realPhone.replace("/", "")}
+          bgDarken={0.7}
+        >
           <Heading size={1} textColor="white">
             Profile on real devices
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             📲
           </Heading>
         </Slide>
 
-
-        <Slide transition={["fade"]} bgImage={images.waterfalls.replace("/", "")} bgDarken={0.7}>
+        <Slide
+          transition={["fade"]}
+          bgImage={images.waterfalls.replace("/", "")}
+          bgDarken={0.7}
+        >
           <Heading size={1} textColor="white">
             Avoid request waterfalls
           </Heading>
-          <Heading size={1} textColor="white" style={{ marginTop: '0.5em', fontSize: '2em' }}>
+          <Heading
+            size={1}
+            textColor="white"
+            style={{ marginTop: "0.5em", fontSize: "2em" }}
+          >
             💀
           </Heading>
         </Slide>
-
 
         <Slide transition={["fade"]} bgColor="blue">
           <Heading size={1} textColor="white">
             Resources
           </Heading>
           <List ordered textColor="white">
-            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
-              <Link href="https://addyosmani.com/blog/progressive-web-apps-with-react/" target="__blank" textColor="white">Addy Osmani: PWA with React</Link>
+            <ListItem style={{ fontSize: "1em", lineHeight: "2em" }}>
+              <Link
+                href="https://addyosmani.com/blog/progressive-web-apps-with-react/"
+                target="__blank"
+                textColor="white"
+              >
+                Addy Osmani: PWA with React
+              </Link>
             </ListItem>
-            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
-              <Link href="https://www.youtube.com/watch?v=QH94CXVv3UE" target="__blank" textColor="white">Totally Tooling Tips S3, E15</Link>
+            <ListItem style={{ fontSize: "1em", lineHeight: "2em" }}>
+              <Link
+                href="https://www.youtube.com/watch?v=QH94CXVv3UE"
+                target="__blank"
+                textColor="white"
+              >
+                Totally Tooling Tips S3, E15
+              </Link>
             </ListItem>
-            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
-              <Link href="https://medium.com/@adamrackis/vendor-and-code-splitting-in-webpack-2-6376358f1923" target="__blank" textColor="white">Vendor code splitting in Webpack 2</Link>
+            <ListItem style={{ fontSize: "1em", lineHeight: "2em" }}>
+              <Link
+                href="https://medium.com/@adamrackis/vendor-and-code-splitting-in-webpack-2-6376358f1923"
+                target="__blank"
+                textColor="white"
+              >
+                Vendor code splitting in Webpack 2
+              </Link>
             </ListItem>
-            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
-              <Link href="https://survivejs.com/webpack/introduction/" target="__blank" textColor="white">https://survivejs.com/webpack</Link>
+            <ListItem style={{ fontSize: "1em", lineHeight: "2em" }}>
+              <Link
+                href="https://survivejs.com/webpack/introduction/"
+                target="__blank"
+                textColor="white"
+              >
+                https://survivejs.com/webpack
+              </Link>
             </ListItem>
-            <ListItem style={{ fontSize: '1em', lineHeight: '2em' }}>
-              <Link href="https://webpack.js.org/guides/code-splitting/" target="__blank" textColor="white">https://webpack.js.org/</Link>
-            </ListItem>
-          </List>
-        </Slide>
-
-        <Slide transition={["fade"]} bgImage={images.ironmanThanks.replace("/", "")} bgDarken={0.55}>
-          <Heading size={1} textColor='white' style={{ fontSize: '2.5em' }}>Thank you!</Heading>
-          <List style={{ listStyle: 'none', textAlign: 'center' }} textColor="white">
-            <ListItem>
-              <Link href="http://suevalov.com" target="__blank" textColor="white">Alex Suevalov</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="https://twitter.com/Suevalov" target="__blank" textColor="white">@suevalov</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="http://suevalov.com/" target="__blank" textColor="white">suevalov.com</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="https://github.com/suevalov" target="__blank" textColor="white">https://github.com/suevalov</Link>
-            </ListItem>
-            <ListItem style={{ marginTop: 40 }}>
-              <Link href="http://dataart.com" target="__blank" textColor="white">
-                <Image width="40%" src={images.dataart.replace("/", "")} style={{ backgroundColor: 'white' }} />
+            <ListItem style={{ fontSize: "1em", lineHeight: "2em" }}>
+              <Link
+                href="https://webpack.js.org/guides/code-splitting/"
+                target="__blank"
+                textColor="white"
+              >
+                https://webpack.js.org/
               </Link>
             </ListItem>
           </List>
         </Slide>
-      </Deck >
+
+        <Slide
+          transition={["fade"]}
+          bgImage={images.ironmanThanks.replace("/", "")}
+          bgDarken={0.55}
+        >
+          <Heading size={1} textColor="white" style={{ fontSize: "2.5em" }}>
+            Thank you!
+          </Heading>
+          <List
+            style={{ listStyle: "none", textAlign: "center" }}
+            textColor="white"
+          >
+            <ListItem>
+              <Link
+                href="http://suevalov.com"
+                target="__blank"
+                textColor="white"
+              >
+                Alex Suevalov
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                href="https://twitter.com/Suevalov"
+                target="__blank"
+                textColor="white"
+              >
+                @suevalov
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                href="http://suevalov.com/"
+                target="__blank"
+                textColor="white"
+              >
+                suevalov.com
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                href="https://github.com/suevalov"
+                target="__blank"
+                textColor="white"
+              >
+                https://github.com/suevalov
+              </Link>
+            </ListItem>
+            <ListItem style={{ marginTop: 40 }}>
+              <Link
+                href="http://dataart.com"
+                target="__blank"
+                textColor="white"
+              >
+                <Image
+                  width="40%"
+                  src={images.dataart.replace("/", "")}
+                  style={{ backgroundColor: "white" }}
+                />
+              </Link>
+            </ListItem>
+          </List>
+        </Slide>
+      </Deck>
     );
   }
 }
